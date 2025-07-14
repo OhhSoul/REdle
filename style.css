@@ -6,92 +6,87 @@ body {
   margin: 0;
   padding: 0;
 }
+
 h1 {
   margin-top: 20px;
   color: #f44336;
 }
+
 #game {
   margin-top: 20px;
+  position: relative;
+  display: inline-block;
+  width: 250px;
 }
-#guessInput {
+
+input[type="text"] {
   padding: 10px;
-  width: 220px;
+  width: 100%;
+  box-sizing: border-box;
   font-size: 16px;
 }
-#guessButton {
+
+button {
   padding: 10px 20px;
   margin-left: 10px;
   cursor: pointer;
   font-size: 16px;
 }
+
 #results {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  flex-wrap: wrap;
+  margin-top: 20px;
 }
-table {
+
+.table {
+  display: inline-block;
+  margin-top: 20px;
   border-collapse: collapse;
-  width: 280px;
-  background: #222;
-  border-radius: 8px;
+  text-align: left;
 }
-th, td {
+
+.table th, .table td {
   border: 1px solid #555;
   padding: 8px 12px;
-  color: #eee;
 }
-th {
-  background-color: #333;
-}
+
 .correct { color: #4caf50; }
 .partial { color: #03a9f4; }
 .incorrect { color: #f44336; }
-#playAgain {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
+
 #legend {
   margin-top: 30px;
   text-align: left;
-  width: 320px;
+  width: 300px;
   margin-left: auto;
   margin-right: auto;
   background: #222;
   padding: 10px;
   border-radius: 8px;
-  user-select: none;
 }
-#legend h3 {
-  cursor: pointer;
-  margin: 0;
-}
-/* Dropdown styles */
-#autocomplete-list {
+
+/* Autocomplete styles */
+.autocomplete-items {
   position: absolute;
-  border: 1px solid #555;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /* position the autocomplete items below the input: */
+  top: 42px;
+  left: 0;
+  right: 0;
   background-color: #222;
   max-height: 150px;
   overflow-y: auto;
-  width: 220px;
-  margin-top: 2px;
   color: #eee;
-  border-radius: 0 0 6px 6px;
-  z-index: 99;
 }
-#autocomplete-list div {
-  padding: 8px 10px;
+
+.autocomplete-items div {
+  padding: 10px;
   cursor: pointer;
+  border-bottom: 1px solid #444;
 }
-#autocomplete-list div:hover,
-#autocomplete-list .autocomplete-active {
-  background-color: #444;
-}
-/* Container for input + dropdown for positioning */
-#input-container {
-  position: relative;
-  display: inline-block;
+
+.autocomplete-items div:hover {
+  background-color: #575757;
 }
