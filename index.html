@@ -10,10 +10,19 @@
 
 <p>Guess the Resident Evil character!</p>
 
-<input id="guess" placeholder="Type a name here">
+<input type="text" id="guess" list="characters" autocomplete="off" placeholder="Type a name">
+<datalist id="characters"></datalist>
 <button onclick="makeGuess()">Guess</button>
 
-<div id="results"></div>
+<div id="results">
+  <div class="header-row">
+    <div class="cell name-header">Name</div>
+    <div class="cell">Debut</div>
+    <div class="cell">Playable</div>
+  </div>
+</div>
+
+<button id="play-again" onclick="resetGame()" style="display:none;">Play Again</button>
 
 <script src="script.js"></script>
 </body>
