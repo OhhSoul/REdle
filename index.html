@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>REdle</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>REdle</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>REdle</h1>
-  <div id="game">
-    <div style="position: relative; display: inline-block;">
-      <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" />
-    </div>
-    <button id="guessButton">Guess</button>
-    <div id="results"></div>
-    <button id="playAgain" style="display:none; margin-top:20px;">Play Again</button>
+<h1>REdle</h1>
+
+<div id="game">
+  <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" list="charactersList" />
+  <datalist id="charactersList"></datalist>
+  <button id="guessButton">Guess</button>
+  <div id="results"></div>
+  <button id="playAgain" style="display:none; margin-top:20px;">Play Again</button>
+</div>
+
+<div id="legend">
+  <h3 onclick="toggleLegend()">Legend (click to expand/collapse)</h3>
+  <div id="legend-content" style="display:none;">
+    <p>✅ — Playable</p>
+    <p>❌ — Not Playable</p>
+    <p>✔️ — Correct</p>
+    <p>❌ — Incorrect</p>
+    <p>🟠 — Close</p>
   </div>
-  <div id="legend">
-    <h3 onclick="toggleLegend()">Legend (click to expand/collapse)</h3>
-    <div id="legend-content">
-      <p>✔️ — Correct</p>
-      <p>❌ — Incorrect</p>
-      <p>Yes / No — Playable</p>
-    </div>
-  </div>
-  <script src="script.js"></script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
