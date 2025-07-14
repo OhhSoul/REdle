@@ -58,7 +58,11 @@ function displayResults(guess) {
 
 function guessCharacter() {
   const inputVal = document.getElementById('guessInput').value.trim().toLowerCase();
-  const guess = characters.find(c => c.name.toLowerCase() === inputVal);
+
+  const guess = characters.find(c => {
+    const parts = c.name.toLowerCase().split(" ");
+    return c.name.toLowerCase() === inputVal || parts.includes(inputVal);
+  });
 
   if (!guess) {
     alert("Character not found. Try again.");
@@ -91,6 +95,19 @@ function toggleLegend() {
   content.style.display = (content.style.display === 'none' || content.style.display === '') ? 'block' : 'none';
 }
 
+function setupAutocomplete() {
+  const input = document.getElementById('guessInput');
+  const datalist = document.createElement('datalist');
+  datalist.id = "characterList";
+  characters.forEach(c => {
+    const option = document.createElement('option');
+    option.value = c.name;
+    datalist.appendChild(option);
+  });
+  document.body.appendChild(datalist);
+  input.setAttribute('list', 'characterList');
+}
+
 document.getElementById('guessButton').addEventListener('click', guessCharacter);
 document.getElementById('playAgain').addEventListener('click', resetGame);
 document.getElementById('legend').addEventListener('click', toggleLegend);
@@ -99,4 +116,5 @@ document.getElementById('guessInput').addEventListener('keypress', function(e) {
 });
 
 pickCharacter();
+setupAutocomplete();
 });
