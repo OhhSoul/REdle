@@ -14,23 +14,17 @@ h1 {
 
 #game {
   margin-top: 20px;
-  position: relative;
-  display: inline-block;
-  width: 250px;
 }
 
 input[type="text"] {
   padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 16px;
+  width: 200px;
 }
 
 button {
   padding: 10px 20px;
   margin-left: 10px;
   cursor: pointer;
-  font-size: 16px;
 }
 
 #results {
@@ -41,7 +35,6 @@ button {
   display: inline-block;
   margin-top: 20px;
   border-collapse: collapse;
-  text-align: left;
 }
 
 .table th, .table td {
@@ -50,7 +43,6 @@ button {
 }
 
 .correct { color: #4caf50; }
-.partial { color: #03a9f4; }
 .incorrect { color: #f44336; }
 
 #legend {
@@ -64,29 +56,12 @@ button {
   border-radius: 8px;
 }
 
-/* Autocomplete styles */
-.autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /* position the autocomplete items below the input: */
-  top: 42px;
-  left: 0;
-  right: 0;
-  background-color: #222;
-  max-height: 150px;
-  overflow-y: auto;
-  color: #eee;
-}
-
-.autocomplete-items div {
-  padding: 10px;
+#legend h3 {
   cursor: pointer;
-  border-bottom: 1px solid #444;
+  margin: 0;
 }
 
-.autocomplete-items div:hover {
-  background-color: #575757;
+#legend-content {
+  display: none;
+  margin-top: 10px;
 }
