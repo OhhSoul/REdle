@@ -11,17 +11,17 @@
 <div id="game">
   <input id="guessInput" type="text" placeholder="Type a character...">
   <button id="guessButton">Guess</button>
+  <select id="dropdown" style="display:none;"></select>
   <div id="results"></div>
   <button id="playAgain" style="display:none; margin-top:20px;">Play Again</button>
 </div>
 <div id="legend">
-  <h3>Legend (click to expand/collapse)</h3>
+  <h3 onclick="toggleLegend()">Legend (click to expand/collapse)</h3>
   <div id="legend-content">
-    <p>✅ — Fully playable main character</p>
-    <p>🔷 — Playable briefly / special segment</p>
-    <p>❌ — Not playable</p>
     <p>✔️ — Correct</p>
     <p>❌ — Incorrect</p>
+    <p>Yes — Playable</p>
+    <p>No — Not playable</p>
     <p>🟠 — Close</p>
   </div>
 </div>
