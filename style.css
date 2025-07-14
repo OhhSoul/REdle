@@ -1,94 +1,97 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  padding: 20px;
-  background-color: #0b0b0b;
+  background-color: #121212;
   color: #eee;
-  min-height: 100vh;
   margin: 0;
+  padding: 0;
 }
-
 h1 {
-  font-size: 3em;
-  color: #d32f2f;
-  margin-bottom: 0;
+  margin-top: 20px;
+  color: #f44336;
 }
-
-p {
-  margin-top: 0;
-  color: #ccc;
+#game {
+  margin-top: 20px;
 }
-
-#game-container {
-  margin: 20px 0;
+#guessInput {
+  padding: 10px;
+  width: 220px;
+  font-size: 16px;
 }
-
-input, button {
-  font-size: 1em;
-  margin: 5px;
+#guessButton {
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+#results {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+table {
+  border-collapse: collapse;
+  width: 280px;
+  background: #222;
+  border-radius: 8px;
+}
+th, td {
+  border: 1px solid #555;
   padding: 8px 12px;
-  border-radius: 4px;
-  border: none;
+  color: #eee;
 }
-
-input {
-  width: 200px;
+th {
+  background-color: #333;
 }
-
-button {
-  background-color: #d32f2f;
-  color: white;
+.correct { color: #4caf50; }
+.partial { color: #03a9f4; }
+.incorrect { color: #f44336; }
+#playAgain {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
 }
-
-button:hover {
-  background-color: #b71c1c;
-}
-
-#results {
-  margin-top: 20px;
-  display: inline-block;
+#legend {
+  margin-top: 30px;
   text-align: left;
-}
-
-.header-row, .guess-row {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0;
-}
-
-.cell {
-  flex: 1;
-  text-align: center;
-  border: 1px solid #444;
-  padding: 5px;
-  background-color: #1c1c1c;
-}
-
-.name-header {
-  flex: 2;
-  font-weight: bold;
-}
-
-.autocomplete-items {
-  position: absolute;
-  background-color: #222;
-  border: 1px solid #444;
-  max-height: 150px;
-  overflow-y: auto;
-  width: 200px;
+  width: 320px;
   margin-left: auto;
   margin-right: auto;
-  left: 0;
-  right: 0;
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+  user-select: none;
+}
+#legend h3 {
+  cursor: pointer;
+  margin: 0;
+}
+/* Dropdown styles */
+#autocomplete-list {
+  position: absolute;
+  border: 1px solid #555;
+  background-color: #222;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 220px;
+  margin-top: 2px;
+  color: #eee;
+  border-radius: 0 0 6px 6px;
   z-index: 99;
 }
-
-.autocomplete-item {
-  padding: 5px;
+#autocomplete-list div {
+  padding: 8px 10px;
   cursor: pointer;
 }
-
-.autocomplete-item:hover {
+#autocomplete-list div:hover,
+#autocomplete-list .autocomplete-active {
   background-color: #444;
+}
+/* Container for input + dropdown for positioning */
+#input-container {
+  position: relative;
+  display: inline-block;
 }
