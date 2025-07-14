@@ -58,24 +58,31 @@ function displayResults(guess) {
     </tr>
   `;
 
-  // Guessed character row (left side)
+  // Abbreviation map for debut titles
+  const debutAbbreviations = {
+    "Resident Evil": "RE1",
+    "Resident Evil 2": "RE2",
+    "Resident Evil 3": "RE3"
+  };
+
+  // Guessed character row
   const guessRow = document.createElement("tr");
   guessRow.innerHTML = `
     <td>${guess.name}</td>
-    <td>${checkMatch(currentCharacter.debut, guess.debut)}</td>
+    <td>${debutAbbreviations[guess.debut] || guess.debut} ${checkMatch(currentCharacter.debut, guess.debut)}</td>
     <td>${guess.playable ? 'Yes ✅' : 'No ❌'}</td>
     <td>${guess.faction} ${checkMatch(currentCharacter.faction, guess.faction)}</td>
-    <td>${checkMatch(currentCharacter.gender, guess.gender)}</td>
+    <td>${guess.gender} ${checkMatch(currentCharacter.gender, guess.gender)}</td>
   `;
   table.appendChild(guessRow);
 
-  // If correct guess, show answer row below
+  // If correct guess, show answer row
   if (guess.name === currentCharacter.name) {
     const answerRow = document.createElement("tr");
     answerRow.style.fontWeight = "bold";
     answerRow.innerHTML = `
       <td><strong>Answer: ${currentCharacter.name}</strong></td>
-      <td>${currentCharacter.debut}</td>
+      <td>${debutAbbreviations[currentCharacter.debut] || currentCharacter.debut}</td>
       <td>${currentCharacter.playable ? 'Yes ✅' : 'No ❌'}</td>
       <td>${currentCharacter.faction}</td>
       <td>${currentCharacter.gender}</td>
