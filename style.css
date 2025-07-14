@@ -1,7 +1,9 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #121212;
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+              url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
   color: #eee;
   margin: 0;
   padding: 0;
@@ -92,7 +94,7 @@ button {
   border: 1px solid #ddd;
   border-top: none;
   z-index: 99;
-  top: 40px; /* adjust based on input height */
+  top: 40px;
   left: 0;
   right: 0;
   background-color: #222;
