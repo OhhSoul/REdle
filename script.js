@@ -45,9 +45,22 @@ function displayResults(guess) {
   attributes.forEach(attr => {
     const row = document.createElement('tr');
     const isCorrect = guess[attr] === currentCharacter[attr];
+
+    let guessValue = guess[attr];
+    if (!isCorrect && attr !== 'name') {
+      if (attr === 'playable') {
+        guessValue = guess[attr] === '✅' ? 'Yes' : 'No';
+      }
+      if (attr === 'debut' || attr === 'faction' || attr === 'gender') {
+        guessValue = guess[attr];
+      }
+    } else if (isCorrect && attr === 'playable') {
+      guessValue = 'Yes';
+    }
+
     row.innerHTML = `
       <td>${attr.charAt(0).toUpperCase() + attr.slice(1)}</td>
-      <td>${guess[attr]}</td>
+      <td>${guessValue}</td>
       <td>${isCorrect ? '<span class="correct">✔️</span>' : '<span class="incorrect">❌</span>'}</td>
     `;
     table.appendChild(row);
@@ -61,7 +74,7 @@ function guessCharacter() {
 
   const guess = characters.find(c => {
     const parts = c.name.toLowerCase().split(" ");
-    return c.name.toLowerCase() === inputVal || parts.includes(inputVal);
+    return c.name.toLowerCase() === inputVal || parts.some(part => part === inputVal);
   });
 
   if (!guess) {
@@ -97,15 +110,32 @@ function toggleLegend() {
 
 function setupAutocomplete() {
   const input = document.getElementById('guessInput');
-  const datalist = document.createElement('datalist');
-  datalist.id = "characterList";
-  characters.forEach(c => {
-    const option = document.createElement('option');
-    option.value = c.name;
-    datalist.appendChild(option);
+
+  input.addEventListener('input', () => {
+    const val = input.value.trim().toLowerCase();
+    let list = document.getElementById('characterList');
+    if (!list) {
+      list = document.createElement('datalist');
+      list.id = 'characterList';
+      document.body.appendChild(list);
+      input.setAttribute('list', 'characterList');
+    }
+
+    list.innerHTML = '';
+
+    if (val.length === 0) return;
+
+    const matches = characters.filter(c => {
+      const [first, last] = c.name.toLowerCase().split(' ');
+      return first.startsWith(val) || last.startsWith(val);
+    });
+
+    matches.forEach(c => {
+      const option = document.createElement('option');
+      option.value = c.name;
+      list.appendChild(option);
+    });
   });
-  document.body.appendChild(datalist);
-  input.setAttribute('list', 'characterList');
 }
 
 document.getElementById('guessButton').addEventListener('click', guessCharacter);
