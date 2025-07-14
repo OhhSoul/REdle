@@ -8,25 +8,23 @@
 </head>
 <body>
   <h1>REdle</h1>
-
   <div id="game">
-    <div id="input-container">
-      <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" />
-      <div id="autocomplete-list"></div>
-    </div>
+    <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" />
     <button id="guessButton">Guess</button>
+    <div id="autocomplete-list" class="autocomplete-items"></div>
     <div id="results"></div>
-    <button id="playAgain" style="display:none;">Play Again</button>
+    <button id="playAgain" style="display:none; margin-top:20px;">Play Again</button>
   </div>
 
   <div id="legend">
-    <h3 id="legendToggle">Legend (click to expand/collapse)</h3>
-    <div id="legend-content" style="display:none;">
+    <h3 id="legendToggle" style="cursor:pointer;">Legend (click to expand/collapse)</h3>
+    <div id="legend-content" style="display:none; margin-top:10px;">
       <p>✅ — Fully playable main character</p>
       <p>🔷 — Playable briefly / special segment</p>
       <p>❌ — Not playable</p>
       <p>✔️ — Correct</p>
       <p>❌ — Incorrect</p>
+      <p>🟠 — Close</p>
     </div>
   </div>
 
