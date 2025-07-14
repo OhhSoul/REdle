@@ -7,19 +7,7 @@ const characters = [
 ];
 
 let answer = null;
-
-function populateDatalist() {
-  const datalist = document.getElementById("characters");
-  datalist.innerHTML = "";
-  characters
-    .map(c => c.name)
-    .sort()
-    .forEach(name => {
-      const option = document.createElement("option");
-      option.value = name;
-      datalist.appendChild(option);
-    });
-}
+let gameOver = false;
 
 function pickRandomCharacter(excludeName = "") {
   let newAnswer;
@@ -30,6 +18,8 @@ function pickRandomCharacter(excludeName = "") {
 }
 
 function makeGuess() {
+  if (gameOver) return;
+
   const guessInput = document.getElementById("guess");
   const resultsDiv = document.getElementById("results");
   const playAgainBtn = document.getElementById("play-again");
@@ -68,12 +58,47 @@ function makeGuess() {
     winRow.innerHTML = `<p>🎉 Correct! The answer was <strong>${answer.name}</strong>.</p>`;
     resultsDiv.appendChild(winRow);
     playAgainBtn.style.display = "inline";
+    document.getElementById("guess").disabled = true;
+    document.getElementById("guess-btn").disabled = true;
+    gameOver = true;
   }
 
   guessInput.value = "";
+  closeAutocomplete();
 }
 
-document.addEventListener("keydown", function(event) {
+// Autocomplete functionality
+document.getElementById("guess").addEventListener("input", function () {
+  const val = this.value.toLowerCase();
+  const listDiv = document.getElementById("autocomplete-list");
+  listDiv.innerHTML = "";
+  if (!val) return;
+
+  characters
+    .filter(c => c.name.toLowerCase().startsWith(val))
+    .forEach(c => {
+      const div = document.createElement("div");
+      div.textContent = c.name;
+      div.classList.add("autocomplete-item");
+      div.onclick = function () {
+        document.getElementById("guess").value = c.name;
+        closeAutocomplete();
+      };
+      listDiv.appendChild(div);
+    });
+});
+
+function closeAutocomplete() {
+  document.getElementById("autocomplete-list").innerHTML = "";
+}
+
+document.addEventListener("click", function (e) {
+  if (e.target.id !== "guess") {
+    closeAutocomplete();
+  }
+});
+
+document.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     makeGuess();
   }
@@ -86,7 +111,6 @@ function resetGame() {
   const oldAnswer = answer ? answer.name : "";
   answer = pickRandomCharacter(oldAnswer);
 
-  // Reset results area but keep header
   resultsDiv.innerHTML = `
     <div class="header-row">
       <div class="cell name-header">Name</div>
@@ -96,7 +120,10 @@ function resetGame() {
   `;
 
   playAgainBtn.style.display = "none";
+  document.getElementById("guess").disabled = false;
+  document.getElementById("guess-btn").disabled = false;
+  document.getElementById("guess").value = "";
+  gameOver = false;
 }
 
-populateDatalist();
 resetGame();
