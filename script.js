@@ -79,4 +79,62 @@ function guessCharacter() {
     displayResults(guess);
     document.getElementById('guessInput').disabled = true;
     document.getElementById('guessButton').disabled = true;
-    document.getElementById('drop
+    document.getElementById('dropdown').style.display = 'none';
+    document.getElementById('playAgain').style.display = 'inline-block';
+  } else {
+    displayResults(guess);
+  }
+}
+
+function resetGame() {
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('guessInput').value = '';
+  document.getElementById('guessInput').disabled = false;
+  document.getElementById('guessButton').disabled = false;
+  document.getElementById('dropdown').style.display = 'none';
+  document.getElementById('playAgain').style.display = 'none';
+  pickCharacter();
+}
+
+function toggleLegend() {
+  const content = document.getElementById('legend-content');
+  content.style.display = (content.style.display === 'none' || content.style.display === '') ? 'block' : 'none';
+}
+
+document.getElementById('guessButton').addEventListener('click', guessCharacter);
+document.getElementById('playAgain').addEventListener('click', resetGame);
+document.getElementById('guessInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') guessCharacter();
+});
+
+document.getElementById('guessInput').addEventListener('input', function() {
+  const input = this.value.trim().toLowerCase();
+  const dropdown = document.getElementById('dropdown');
+  dropdown.innerHTML = '';
+
+  if (input.length === 0) {
+    dropdown.style.display = 'none';
+    return;
+  }
+
+  const filtered = characters.filter(c =>
+    c.name.toLowerCase().split(" ")[0].startsWith(input) ||
+    c.name.toLowerCase().split(" ")[1]?.startsWith(input)
+  );
+
+  filtered.forEach(c => {
+    const option = document.createElement('option');
+    option.value = c.name;
+    option.textContent = c.name;
+    dropdown.appendChild(option);
+  });
+
+  dropdown.style.display = filtered.length > 0 ? 'inline-block' : 'none';
+
+  dropdown.onchange = function() {
+    document.getElementById('guessInput').value = dropdown.value;
+    dropdown.style.display = 'none';
+  };
+});
+
+pickCharacter();
