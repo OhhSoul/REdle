@@ -18,69 +18,109 @@ const characters = [
   { name: "Mikhail Victor", debut: "Resident Evil 3", playable: false, faction: "U.B.C.S.", gender: "Male" }
 ];
 
-let currentCharacter;
+let currentCharacter = null;
+const guessInput = document.getElementById("guessInput");
+const guessButton = document.getElementById("guessButton");
+const playAgainButton = document.getElementById("playAgain");
+const resultsDiv = document.getElementById("results");
+const charactersList = document.getElementById("charactersList");
 
+// Pick a new character randomly (not same as last)
 function pickCharacter() {
   let newChar;
   do {
     newChar = characters[Math.floor(Math.random() * characters.length)];
   } while (newChar === currentCharacter);
   currentCharacter = newChar;
+  clearGame();
 }
 
-function displayResults(guess) {
-  const resultDiv = document.getElementById("results");
-  resultDiv.innerHTML = "";
+// Clear input, results, buttons for a new round
+function clearGame() {
+  resultsDiv.innerHTML = "";
+  guessInput.value = "";
+  guessInput.disabled = false;
+  guessButton.disabled = false;
+  playAgainButton.style.display = "none";
+  guessInput.focus();
+}
 
+// Display results after a guess
+function displayResults(guess) {
+  resultsDiv.innerHTML = "";
+
+  // Table headers
   const table = document.createElement("table");
   table.className = "table";
-
   table.innerHTML = `
-    <tr><th>Name</th><th>Debut</th><th>Playable</th><th>Faction</th><th>Gender</th></tr>
+    <tr>
+      <th>Name</th><th>Debut</th><th>Playable</th><th>Faction</th><th>Gender</th>
+    </tr>
   `;
 
-  const row = document.createElement("tr");
-
-  // "Your guess" data
-  row.innerHTML = `
+  // Guessed character row (left side)
+  const guessRow = document.createElement("tr");
+  guessRow.innerHTML = `
     <td>${guess.name}</td>
-    <td>${check(currentCharacter.debut, guess.debut)}</td>
-    <td>${guess.playable ? "Yes" : "No"}</td>
-    <td>${check(currentCharacter.faction, guess.faction)}</td>
-    <td>${check(currentCharacter.gender, guess.gender)}</td>
+    <td>${checkMatch(currentCharacter.debut, guess.debut)}</td>
+    <td>${guess.playable ? 'Yes ✅' : 'No ❌'}</td>
+    <td>${checkMatch(currentCharacter.faction, guess.faction)}</td>
+    <td>${checkMatch(currentCharacter.gender, guess.gender)}</td>
   `;
+  table.appendChild(guessRow);
 
-  table.appendChild(row);
+  // If correct guess, show answer row below
+  if (guess.name === currentCharacter.name) {
+    const answerRow = document.createElement("tr");
+    answerRow.style.fontWeight = "bold";
+    answerRow.innerHTML = `
+      <td><strong>Answer: ${currentCharacter.name}</strong></td>
+      <td>${currentCharacter.debut}</td>
+      <td>${currentCharacter.playable ? 'Yes ✅' : 'No ❌'}</td>
+      <td>${currentCharacter.faction}</td>
+      <td>${currentCharacter.gender}</td>
+    `;
+    table.appendChild(answerRow);
+  }
 
-  // Correct answer row on the left side
-  const correctRow = document.createElement("tr");
-  correctRow.style.borderTop = "2px solid #f44336";
-  correctRow.innerHTML = `
-    <td><strong>Answer: ${currentCharacter.name}</strong></td>
-    <td>${currentCharacter.debut}</td>
-    <td>${currentCharacter.playable ? "✔️" : "❌"}</td>
-    <td>${currentCharacter.faction}</td>
-    <td>${currentCharacter.gender}</td>
-  `;
-  table.insertBefore(correctRow, table.firstChild);
-
-  resultDiv.appendChild(table);
+  resultsDiv.appendChild(table);
 }
 
-function check(actual, guessVal) {
-  if (actual === guessVal) return `<span class="correct">✔️</span>`;
-  else return `<span class="incorrect">❌</span>`;
+// Check if guessed value matches the answer, return check or cross
+function checkMatch(answerVal, guessVal) {
+  return answerVal === guessVal ? '✔️' : '❌';
 }
 
+// Filter dropdown options based on input
+function filterDropdownOptions(value) {
+  const input = value.trim().toLowerCase();
+
+  // Clear current options
+  charactersList.innerHTML = "";
+
+  if (input.length === 0) return;
+
+  // Only add names whose first or last name starts with the input letter
+  characters.forEach(char => {
+    const parts = char.name.toLowerCase().split(" ");
+    if (parts.some(part => part.startsWith(input))) {
+      const option = document.createElement("option");
+      option.value = char.name;
+      charactersList.appendChild(option);
+    }
+  });
+}
+
+// Guess logic
 function guessCharacter() {
-  const input = document.getElementById("guessInput").value.trim().toLowerCase();
-  const guess = characters.find(
-    (c) =>
-      c.name.toLowerCase() === input ||
-      c.name
-        .toLowerCase()
-        .split(" ")
-        .some((part) => part === input)
+  let inputVal = guessInput.value.trim().toLowerCase();
+
+  if (!inputVal) return;
+
+  // Find character by full name or partial first/last name (case-insensitive)
+  let guess = characters.find(c =>
+    c.name.toLowerCase() === inputVal ||
+    c.name.toLowerCase().split(" ").some(part => part === inputVal)
   );
 
   if (!guess) {
@@ -90,92 +130,36 @@ function guessCharacter() {
 
   displayResults(guess);
 
+  // If correct guess
   if (guess.name === currentCharacter.name) {
-    document.getElementById("guessInput").disabled = true;
-    document.getElementById("guessButton").disabled = true;
-    document.getElementById("playAgain").style.display = "inline-block";
+    guessInput.disabled = true;
+    guessButton.disabled = true;
+    playAgainButton.style.display = "inline-block";
   }
 }
 
-function resetGame() {
-  document.getElementById("results").innerHTML = "";
-  document.getElementById("guessInput").value = "";
-  document.getElementById("guessInput").disabled = false;
-  document.getElementById("guessButton").disabled = false;
-  document.getElementById("playAgain").style.display = "none";
-  pickCharacter();
-  closeAllLists();
-}
-
+// Toggle legend visibility
 function toggleLegend() {
-  const content = document.getElementById("legend-content");
-  content.style.display =
-    content.style.display === "block" ? "none" : "block";
+  const legendContent = document.getElementById("legend-content");
+  legendContent.style.display = legendContent.style.display === "none" || legendContent.style.display === "" ? "block" : "none";
 }
 
-// Autocomplete implementation inside the input box:
-
-const guessInput = document.getElementById("guessInput");
-
-guessInput.addEventListener("input", function () {
-  const val = this.value.trim().toLowerCase();
-  closeAllLists();
-  if (!val) return false;
-
-  // Container for suggestions
-  const list = document.createElement("div");
-  list.setAttribute("id", this.id + "-autocomplete-list");
-  list.setAttribute("class", "autocomplete-items");
-  this.parentNode.appendChild(list);
-
-  // Filter characters where first or last name starts with val
-  const filtered = characters.filter(
-    (c) =>
-      c.name.toLowerCase().split(" ")[0].startsWith(val) ||
-      (c.name.toLowerCase().split(" ")[1] &&
-        c.name.toLowerCase().split(" ")[1].startsWith(val))
-  );
-
-  filtered.forEach((c) => {
-    const item = document.createElement("div");
-    // Highlight matching part
-    const [firstName, lastName = ""] = c.name.split(" ");
-    let displayName;
-
-    if (firstName.toLowerCase().startsWith(val)) {
-      displayName = `<strong>${firstName.substr(0, val.length)}</strong>${firstName.substr(val.length)} ${lastName}`;
-    } else if (lastName.toLowerCase().startsWith(val)) {
-      displayName = `${firstName} <strong>${lastName.substr(0, val.length)}</strong>${lastName.substr(val.length)}`;
-    } else {
-      displayName = c.name;
-    }
-
-    item.innerHTML = displayName;
-
-    item.addEventListener("click", function () {
-      guessInput.value = c.name;
-      closeAllLists();
-    });
-
-    list.appendChild(item);
-  });
+// Event Listeners
+guessButton.addEventListener("click", guessCharacter);
+playAgainButton.addEventListener("click", () => {
+  pickCharacter();
 });
 
-function closeAllLists(elmnt) {
-  const items = document.getElementsByClassName("autocomplete-items");
-  for (let i = items.length - 1; i >= 0; i--) {
-    if (elmnt != items[i] && elmnt != guessInput) {
-      items[i].parentNode.removeChild(items[i]);
-    }
+guessInput.addEventListener("input", (e) => {
+  filterDropdownOptions(e.target.value);
+});
+
+guessInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault(); // prevent form submit if any
+    guessCharacter();
   }
-}
-
-document.addEventListener("click", function (e) {
-  closeAllLists(e.target);
 });
 
-document.getElementById("guessButton").addEventListener("click", guessCharacter);
-document.getElementById("playAgain").addEventListener("click", resetGame);
-
-// Initialize game on page load
+// Initialize game
 pickCharacter();
