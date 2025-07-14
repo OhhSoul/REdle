@@ -44,6 +44,7 @@ button {
 
 .correct { color: #4caf50; }
 .incorrect { color: #f44336; }
+.partial { color: #03a9f4; }
 
 #legend {
   margin-top: 30px;
@@ -56,12 +57,5 @@ button {
   border-radius: 8px;
 }
 
-#legend h3 {
-  cursor: pointer;
-  margin: 0;
-}
-
-#legend-content {
-  display: none;
-  margin-top: 10px;
-}
+#legend h3 { cursor: pointer; margin: 0; }
+#legend-content { display: none; margin-top: 10px; }
