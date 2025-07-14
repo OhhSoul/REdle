@@ -1,221 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>REdle</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #121212;
-    color: #eee;
-    margin: 0;
-    padding: 0;
-  }
-  h1 {
-    margin-top: 20px;
-    color: #f44336;
-  }
-  #game {
-    margin-top: 20px;
-  }
-  #guessInput {
-    padding: 10px;
-    width: 220px;
-    font-size: 16px;
-  }
-  #guessButton {
-    padding: 10px 20px;
-    margin-left: 10px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  #results {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
-  }
-  table {
-    border-collapse: collapse;
-    width: 280px;
-    background: #222;
-    border-radius: 8px;
-  }
-  th, td {
-    border: 1px solid #555;
-    padding: 8px 12px;
-    color: #eee;
-  }
-  th {
-    background-color: #333;
-  }
-  .correct { color: #4caf50; }
-  .partial { color: #03a9f4; }
-  .incorrect { color: #f44336; }
-  #playAgain {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    display: none;
-    cursor: pointer;
-  }
-  #legend {
-    margin-top: 30px;
-    text-align: left;
-    width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-    background: #222;
-    padding: 10px;
-    border-radius: 8px;
-    user-select: none;
-  }
-  #legend h3 { cursor: pointer; margin: 0; }
-  #legend-content { display: none; margin-top: 10px; color: #ccc; }
-  /* Dropdown styles */
-  #autocomplete-list {
-    position: absolute;
-    border: 1px solid #555;
-    background-color: #222;
-    max-height: 150px;
-    overflow-y: auto;
-    width: 220px;
-    margin-top: 2px;
-    color: #eee;
-    border-radius: 0 0 6px 6px;
-    z-index: 99;
-  }
-  #autocomplete-list div {
-    padding: 8px 10px;
-    cursor: pointer;
-  }
-  #autocomplete-list div:hover, #autocomplete-list .autocomplete-active {
-    background-color: #444;
-  }
-  /* Container for input + dropdown for positioning */
-  #input-container {
-    position: relative;
-    display: inline-block;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>REdle</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<h1>REdle</h1>
-<div id="game">
-  <div id="input-container">
-    <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" />
-    <div id="autocomplete-list"></div>
+  <h1>REdle</h1>
+
+  <div id="game">
+    <div id="input-container">
+      <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" />
+      <div id="autocomplete-list"></div>
+    </div>
+    <button id="guessButton">Guess</button>
+    <div id="results"></div>
+    <button id="playAgain" style="display:none;">Play Again</button>
   </div>
-  <button id="guessButton">Guess</button>
-  <div id="results"></div>
-  <button id="playAgain">Play Again</button>
-</div>
 
-<div id="legend">
-  <h3 onclick="toggleLegend()">Legend (click to expand/collapse)</h3>
-  <div id="legend-content">
-    <p>✅ — Fully playable main character</p>
-    <p>🔷 — Playable briefly / special segment</p>
-    <p>❌ — Not playable</p>
-    <p>✔️ — Correct</p>
-    <p>❌ — Incorrect</p>
+  <div id="legend">
+    <h3 id="legendToggle">Legend (click to expand/collapse)</h3>
+    <div id="legend-content" style="display:none;">
+      <p>✅ — Fully playable main character</p>
+      <p>🔷 — Playable briefly / special segment</p>
+      <p>❌ — Not playable</p>
+      <p>✔️ — Correct</p>
+      <p>❌ — Incorrect</p>
+    </div>
   </div>
-</div>
 
-<script>
-const characters = [
-  { name: "Chris Redfield", debut: "Resident Evil", playable: "✅", faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Jill Valentine", debut: "Resident Evil", playable: "✅", faction: "S.T.A.R.S.", gender: "Female" },
-  { name: "Barry Burton", debut: "Resident Evil", playable: "❌", faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Rebecca Chambers", debut: "Resident Evil", playable: "🔷", faction: "S.T.A.R.S.", gender: "Female" },
-  { name: "Albert Wesker", debut: "Resident Evil", playable: "❌", faction: "Umbrella", gender: "Male" },
-  { name: "Brad Vickers", debut: "Resident Evil", playable: "❌", faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Leon Kennedy", debut: "Resident Evil 2", playable: "✅", faction: "Civilian", gender: "Male" },
-  { name: "Claire Redfield", debut: "Resident Evil 2", playable: "✅", faction: "Civilian", gender: "Female" },
-  { name: "Ada Wong", debut: "Resident Evil 2", playable: "🔷", faction: "Independent", gender: "Female" },
-  { name: "Robert Kendo", debut: "Resident Evil 2", playable: "❌", faction: "Civilian", gender: "Male" },
-  { name: "Ben Bertolucci", debut: "Resident Evil 2", playable: "❌", faction: "Civilian", gender: "Male" },
-  { name: "Annette Birkin", debut: "Resident Evil 2", playable: "❌", faction: "Umbrella", gender: "Female" },
-  { name: "William Birkin", debut: "Resident Evil 2", playable: "❌", faction: "Umbrella", gender: "Male" },
-  { name: "Marvin Branagh", debut: "Resident Evil 2", playable: "❌", faction: "Civilian", gender: "Male" },
-  { name: "Carlos Oliveira", debut: "Resident Evil 3", playable: "✅", faction: "U.B.C.S.", gender: "Male" },
-  { name: "Nicholai Ginovaef", debut: "Resident Evil 3", playable: "❌", faction: "U.B.C.S.", gender: "Male" },
-  { name: "Mikhail Victor", debut: "Resident Evil 3", playable: "❌", faction: "U.B.C.S.", gender: "Male" }
-];
-
-let currentCharacter;
-let gameOver = false;
-
-function pickCharacter() {
-  let newChar;
-  do {
-    newChar = characters[Math.floor(Math.random() * characters.length)];
-  } while (newChar === currentCharacter);
-  currentCharacter = newChar;
-  gameOver = false;
-  clearResults();
-  resetInput();
-  closeAutocomplete();
-}
-
-function createResultTable(title, charObj, highlightObj) {
-  // highlightObj is the guess or answer to check against
-  // For answer table, highlightObj = currentCharacter; for guess table, highlightObj = guess
-
-  const table = document.createElement('table');
-  const header = document.createElement('tr');
-  header.innerHTML = `<th colspan="2">${title}</th>`;
-  table.appendChild(header);
-
-  function addRow(label, value, highlightValue, isEmoji=false) {
-    const row = document.createElement('tr');
-    row.innerHTML = `<td>${label}</td>`;
-    if (!isEmoji) {
-      row.innerHTML += `<td>${value}</td>`;
-    } else {
-      // If emoji, check exact match for highlight green, partial for blue, else red
-      let cls = 'incorrect';
-      if (value === highlightValue) cls = 'correct';
-      else if (value === '🔷' && highlightValue === '✅') cls = 'partial'; // Brief playable vs fully playable
-      row.innerHTML += `<td class="${cls}">${value}</td>`;
-    }
-    table.appendChild(row);
-  }
-
-  addRow('Name', charObj.name, highlightObj.name);
-  addRow('Debut', charObj.debut, highlightObj.debut);
-  addRow('Playable', charObj.playable, highlightObj.playable, true);
-  addRow('Faction', charObj.faction, highlightObj.faction);
-  addRow('Gender', charObj.gender, highlightObj.gender);
-
-  return table;
-}
-
-function displayResults(guess) {
-  const resultsDiv = document.getElementById('results');
-  resultsDiv.innerHTML = '';
-
-  // Show guess on left, answer on right
-  const guessTable = createResultTable('Your Guess', guess, currentCharacter);
-  const answerTable = createResultTable('Correct Answer', currentCharacter, currentCharacter);
-
-  resultsDiv.appendChild(guessTable);
-  resultsDiv.appendChild(answerTable);
-}
-
-function filterCharacters(input) {
-  if (!input) return [];
-  input = input.toLowerCase();
-  return characters.filter(c => c.name.toLowerCase().includes(input));
-}
-
-function closeAutocomplete() {
-  const list = document.getElementById('autocomplete-list');
-  list.innerHTML = '';
-}
-
-function resetInput() {
-  const input = document
+  <script src="script.js"></script>
+</body>
+</html>
