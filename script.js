@@ -1,142 +1,78 @@
 const characters = [
-  { name: "Leon Kennedy", debut: "Resident Evil 2", playable: true },
-  { name: "Claire Redfield", debut: "Resident Evil 2", playable: true },
-  { name: "Chris Redfield", debut: "Resident Evil", playable: true },
-  { name: "Albert Wesker", debut: "Resident Evil", playable: false },
-  { name: "Jill Valentine", debut: "Resident Evil", playable: true }
+  { name: "Chris Redfield", debut: "Resident Evil", playable: "✅", faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Jill Valentine", debut: "Resident Evil", playable: "✅", faction: "S.T.A.R.S.", gender: "Female" },
+  { name: "Barry Burton", debut: "Resident Evil", playable: "❌", faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Rebecca Chambers", debut: "Resident Evil", playable: "🔷", faction: "S.T.A.R.S.", gender: "Female" },
+  { name: "Albert Wesker", debut: "Resident Evil", playable: "❌", faction: "Umbrella", gender: "Male" },
+  { name: "Brad Vickers", debut: "Resident Evil", playable: "❌", faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Leon Kennedy", debut: "Resident Evil 2", playable: "✅", faction: "Civilian", gender: "Male" },
+  { name: "Claire Redfield", debut: "Resident Evil 2", playable: "✅", faction: "Civilian", gender: "Female" },
+  { name: "Ada Wong", debut: "Resident Evil 2", playable: "🔷", faction: "Independent", gender: "Female" },
+  { name: "Robert Kendo", debut: "Resident Evil 2", playable: "❌", faction: "Civilian", gender: "Male" },
+  { name: "Ben Bertolucci", debut: "Resident Evil 2", playable: "❌", faction: "Civilian", gender: "Male" },
+  { name: "Annette Birkin", debut: "Resident Evil 2", playable: "❌", faction: "Umbrella", gender: "Female" },
+  { name: "William Birkin", debut: "Resident Evil 2", playable: "❌", faction: "Umbrella", gender: "Male" },
+  { name: "Marvin Branagh", debut: "Resident Evil 2", playable: "❌", faction: "Civilian", gender: "Male" },
+  { name: "Carlos Oliveira", debut: "Resident Evil 3", playable: "✅", faction: "U.B.C.S.", gender: "Male" },
+  { name: "Nicholai Ginovaef", debut: "Resident Evil 3", playable: "❌", faction: "U.B.C.S.", gender: "Male" },
+  { name: "Mikhail Victor", debut: "Resident Evil 3", playable: "❌", faction: "U.B.C.S.", gender: "Male" }
 ];
 
-let answer = null;
+let currentCharacter = null;
 let gameOver = false;
 
-function pickRandomCharacter(excludeName = "") {
-  let newAnswer;
+const input = document.getElementById("guessInput");
+const guessButton = document.getElementById("guessButton");
+const resultsDiv = document.getElementById("results");
+const playAgainButton = document.getElementById("playAgain");
+const autocompleteList = document.getElementById("autocomplete-list");
+const legendToggle = document.getElementById("legendToggle");
+const legendContent = document.getElementById("legend-content");
+
+function pickCharacter() {
   do {
-    newAnswer = characters[Math.floor(Math.random() * characters.length)];
-  } while (newAnswer.name === excludeName);
-  return newAnswer;
-}
-
-function findCharacter(input) {
-  input = input.toLowerCase();
-  const matches = characters.filter(c => c.name.toLowerCase().includes(input));
-  if (matches.length === 1) {
-    return matches[0];
-  } else if (matches.length > 1) {
-    alert("Be more specific, multiple matches.");
-    return null;
-  } else {
-    return null;
-  }
-}
-
-function makeGuess() {
-  if (gameOver) return;
-
-  const guessInput = document.getElementById("guess");
-  const resultsDiv = document.getElementById("results");
-  const playAgainBtn = document.getElementById("play-again");
-  const gameContainer = document.getElementById("game-container");
-
-  const guessText = guessInput.value.trim().toLowerCase();
-  const guess = findCharacter(guessText);
-
-  if (!guess) {
-    alert("Not a valid or specific enough character.");
-    guessInput.value = "";
-    return;
-  }
-
-  const row = document.createElement("div");
-  row.classList.add("guess-row");
-
-  const nameCell = document.createElement("div");
-  nameCell.classList.add("cell", "name-header");
-  nameCell.textContent = guess.name;
-  row.appendChild(nameCell);
-
-  const debutCell = document.createElement("div");
-  debutCell.classList.add("cell");
-  debutCell.textContent = guess.debut === answer.debut ? "✅" : "❌";
-  row.appendChild(debutCell);
-
-  const playableCell = document.createElement("div");
-  playableCell.classList.add("cell");
-  playableCell.textContent = guess.playable === answer.playable ? "✅" : "❌";
-  row.appendChild(playableCell);
-
-  resultsDiv.appendChild(row);
-
-  if (guess.name === answer.name) {
-    const winRow = document.createElement("div");
-    winRow.innerHTML = `<p>🎉 Correct! The answer was <strong>${answer.name}</strong>.</p>`;
-    resultsDiv.appendChild(winRow);
-    playAgainBtn.style.display = "inline";
-    gameContainer.style.display = "none"; // completely hide input + button
-    gameOver = true;
-  }
-
-  guessInput.value = "";
+    currentCharacter = characters[Math.floor(Math.random() * characters.length)];
+  } while (!currentCharacter);
+  gameOver = false;
+  clearResults();
+  resetInput();
   closeAutocomplete();
 }
 
-// Autocomplete functionality
-document.getElementById("guess").addEventListener("input", function () {
-  const val = this.value.toLowerCase();
-  const listDiv = document.getElementById("autocomplete-list");
-  listDiv.innerHTML = "";
-  if (!val) return;
-
-  characters
-    .filter(c => c.name.toLowerCase().includes(val))
-    .forEach(c => {
-      const div = document.createElement("div");
-      div.textContent = c.name;
-      div.classList.add("autocomplete-item");
-      div.onclick = function () {
-        document.getElementById("guess").value = c.name;
-        closeAutocomplete();
-      };
-      listDiv.appendChild(div);
-    });
-});
-
-function closeAutocomplete() {
-  document.getElementById("autocomplete-list").innerHTML = "";
+function clearResults() {
+  resultsDiv.innerHTML = "";
 }
 
-document.addEventListener("click", function (e) {
-  if (e.target.id !== "guess") {
-    closeAutocomplete();
-  }
-});
-
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    makeGuess();
-  }
-});
-
-function resetGame() {
-  const resultsDiv = document.getElementById("results");
-  const playAgainBtn = document.getElementById("play-again");
-  const gameContainer = document.getElementById("game-container");
-
-  const oldAnswer = answer ? answer.name : "";
-  answer = pickRandomCharacter(oldAnswer);
-
-  resultsDiv.innerHTML = `
-    <div class="header-row">
-      <div class="cell name-header">Name</div>
-      <div class="cell">Debut</div>
-      <div class="cell">Playable</div>
-    </div>
-  `;
-
-  playAgainBtn.style.display = "none";
-  gameContainer.style.display = "block";
-  document.getElementById("guess").value = "";
-  gameOver = false;
+function resetInput() {
+  input.value = "";
+  input.disabled = false;
+  guessButton.disabled = false;
+  playAgainButton.style.display = "none";
 }
 
-resetGame();
+function createResultTable(title, charObj, highlightObj) {
+  const table = document.createElement("table");
+  const header = document.createElement("tr");
+  header.innerHTML = `<th colspan="2">${title}</th>`;
+  table.appendChild(header);
+
+  function addRow(label, value, highlightValue, isEmoji = false) {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${label}</td>`;
+    if (!isEmoji) {
+      // For normal text: green if exact match, red otherwise
+      const cls = value === highlightValue ? "correct" : "incorrect";
+      row.innerHTML += `<td class="${cls}">${value}</td>`;
+    } else {
+      // For emoji, special logic for partial match (🔷 vs ✅)
+      let cls = "incorrect";
+      if (value === highlightValue) cls = "correct";
+      else if (value === "🔷" && highlightValue === "✅") cls = "partial";
+      row.innerHTML += `<td class="${cls}">${value}</td>`;
+    }
+    table.appendChild(row);
+  }
+
+  addRow("Name", charObj.name, highlightObj.name);
+  addRow("Debut", charObj.debut, highlightObj.debut);
+ 
