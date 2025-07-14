@@ -17,18 +17,32 @@ function pickRandomCharacter(excludeName = "") {
   return newAnswer;
 }
 
+function findCharacter(input) {
+  input = input.toLowerCase();
+  const matches = characters.filter(c => c.name.toLowerCase().includes(input));
+  if (matches.length === 1) {
+    return matches[0];
+  } else if (matches.length > 1) {
+    alert("Be more specific, multiple matches.");
+    return null;
+  } else {
+    return null;
+  }
+}
+
 function makeGuess() {
   if (gameOver) return;
 
   const guessInput = document.getElementById("guess");
   const resultsDiv = document.getElementById("results");
   const playAgainBtn = document.getElementById("play-again");
+  const gameContainer = document.getElementById("game-container");
 
   const guessText = guessInput.value.trim().toLowerCase();
-  const guess = characters.find(c => c.name.toLowerCase() === guessText);
+  const guess = findCharacter(guessText);
 
   if (!guess) {
-    alert("Not a valid character.");
+    alert("Not a valid or specific enough character.");
     guessInput.value = "";
     return;
   }
@@ -58,8 +72,7 @@ function makeGuess() {
     winRow.innerHTML = `<p>🎉 Correct! The answer was <strong>${answer.name}</strong>.</p>`;
     resultsDiv.appendChild(winRow);
     playAgainBtn.style.display = "inline";
-    document.getElementById("guess").disabled = true;
-    document.getElementById("guess-btn").disabled = true;
+    gameContainer.style.display = "none"; // completely hide input + button
     gameOver = true;
   }
 
@@ -75,7 +88,7 @@ document.getElementById("guess").addEventListener("input", function () {
   if (!val) return;
 
   characters
-    .filter(c => c.name.toLowerCase().startsWith(val))
+    .filter(c => c.name.toLowerCase().includes(val))
     .forEach(c => {
       const div = document.createElement("div");
       div.textContent = c.name;
@@ -107,6 +120,7 @@ document.addEventListener("keydown", function (event) {
 function resetGame() {
   const resultsDiv = document.getElementById("results");
   const playAgainBtn = document.getElementById("play-again");
+  const gameContainer = document.getElementById("game-container");
 
   const oldAnswer = answer ? answer.name : "";
   answer = pickRandomCharacter(oldAnswer);
@@ -120,8 +134,7 @@ function resetGame() {
   `;
 
   playAgainBtn.style.display = "none";
-  document.getElementById("guess").disabled = false;
-  document.getElementById("guess-btn").disabled = false;
+  gameContainer.style.display = "block";
   document.getElementById("guess").value = "";
   gameOver = false;
 }
