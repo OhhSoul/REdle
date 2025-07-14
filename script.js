@@ -64,7 +64,7 @@ function displayResults(guess) {
     <td>${guess.name}</td>
     <td>${checkMatch(currentCharacter.debut, guess.debut)}</td>
     <td>${guess.playable ? 'Yes ✅' : 'No ❌'}</td>
-    <td>${checkMatch(currentCharacter.faction, guess.faction)}</td>
+    <td>${guess.faction} ${checkMatch(currentCharacter.faction, guess.faction)}</td>
     <td>${checkMatch(currentCharacter.gender, guess.gender)}</td>
   `;
   table.appendChild(guessRow);
