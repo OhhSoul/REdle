@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Resievildle</title>
+<title>REdle</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Resievildle</h1>
+<h1>REdle</h1>
 
 <p>Guess the Resident Evil character!</p>
 
-<input type="text" id="guess" autocomplete="off" placeholder="Type a name">
-<div id="autocomplete-list" class="autocomplete-items"></div>
-<button id="guess-btn" onclick="makeGuess()">Guess</button>
+<div id="game-container">
+  <input type="text" id="guess" autocomplete="off" placeholder="Type a name">
+  <div id="autocomplete-list" class="autocomplete-items"></div>
+  <button id="guess-btn" onclick="makeGuess()">Guess</button>
+</div>
 
 <div id="results">
   <div class="header-row">
