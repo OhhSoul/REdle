@@ -19,6 +19,7 @@ h1 {
 input[type="text"] {
   padding: 10px;
   width: 200px;
+  box-sizing: border-box;
 }
 
 button {
@@ -37,14 +38,21 @@ button {
   border-collapse: collapse;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   border: 1px solid #555;
   padding: 8px 12px;
 }
 
-.correct { color: #4caf50; }
-.incorrect { color: #f44336; }
-.partial { color: #03a9f4; }
+.correct {
+  color: #4caf50;
+}
+.partial {
+  color: #03a9f4;
+}
+.incorrect {
+  color: #f44336;
+}
 
 #legend {
   margin-top: 30px;
@@ -57,5 +65,36 @@ button {
   border-radius: 8px;
 }
 
-#legend h3 { cursor: pointer; margin: 0; }
-#legend-content { display: none; margin-top: 10px; }
+#legend h3 {
+  cursor: pointer;
+  margin: 0;
+}
+#legend-content {
+  display: none;
+  margin-top: 10px;
+}
+
+/* Autocomplete dropdown styles */
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #ddd;
+  border-top: none;
+  z-index: 99;
+  top: 40px; /* adjust based on input height */
+  left: 0;
+  right: 0;
+  background-color: #222;
+  max-height: 150px;
+  overflow-y: auto;
+  color: #eee;
+  box-sizing: border-box;
+}
+
+.autocomplete-items div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.autocomplete-items div:hover {
+  background-color: #444;
+}
