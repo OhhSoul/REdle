@@ -16,14 +16,14 @@
 
   <div id="gameScreen" style="display:none;">
     <div id="guessCounter">0 / 8</div>
-    <div id="gameMessage"></div>
-    <button id="playAgainBtn" style="display:none;">Play Again</button>
-
-    <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" list="charactersList" />
-    <datalist id="charactersList"></datalist>
-    <button id="guessButton">Guess</button>
-
+    <div class="input-container">
+      <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" list="charactersList" />
+      <datalist id="charactersList"></datalist>
+      <button id="guessButton">Guess</button>
+    </div>
+    <div id="resultsHeader"></div>
     <div id="results"></div>
+    <div id="endMessage"></div>
   </div>
 
   <script src="script.js"></script>
