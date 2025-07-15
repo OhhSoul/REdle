@@ -63,10 +63,32 @@ function setMode(mode) {
   guessInput.disabled = false;
   guessButton.disabled = false;
   messageBox.textContent = "";
-  playAgainBtn.style.display = "none";
+  playAgainBtn.style.display = isDailyMode ? "none" : "none";
+
   currentCharacter = isDailyMode ? getDailyCharacter() : getRandomCharacter();
   renderHeaderRow();
+
+  if (isDailyMode) {
+    const dailyKey = getTodayKey();
+    const result = localStorage.getItem(dailyKey);
+    if (result === "win") {
+      showMessage(true);
+      guessInput.disabled = true;
+      guessButton.disabled = true;
+    } else if (result === "lose") {
+      showMessage(false);
+      guessInput.disabled = true;
+      guessButton.disabled = true;
+    }
+  }
+
   guessInput.focus();
+}
+
+function getTodayKey() {
+  const now = new Date();
+  now.setUTCHours(now.getUTCHours() - 4);
+  return `dailyResult_${now.toISOString().split("T")[0]}`;
 }
 
 function getRandomCharacter() {
@@ -122,17 +144,25 @@ function guessCharacter() {
   if (guess.name === currentCharacter.name) {
     guessInput.disabled = true;
     guessButton.disabled = true;
-    messageBox.textContent = `✅ You win! The character was ${currentCharacter.name}.`;
-    playAgainBtn.style.display = "inline-block";
+    showMessage(true);
+    if (!isDailyMode) playAgainBtn.style.display = "inline-block";
+    if (isDailyMode) localStorage.setItem(getTodayKey(), "win");
   } else if (guesses === maxGuesses) {
     guessInput.disabled = true;
     guessButton.disabled = true;
-    messageBox.textContent = `❌ You lose! The character was ${currentCharacter.name}.`;
-    playAgainBtn.style.display = "inline-block";
+    showMessage(false);
+    if (!isDailyMode) playAgainBtn.style.display = "inline-block";
+    if (isDailyMode) localStorage.setItem(getTodayKey(), "lose");
   }
 
   guessInput.value = "";
   filterDropdownOptions("");
+}
+
+function showMessage(win) {
+  messageBox.textContent = win
+    ? `✅ You win! The character was ${currentCharacter.name}.`
+    : `❌ You lose! The character was ${currentCharacter.name}.`;
 }
 
 function renderHeaderRow() {
@@ -180,7 +210,7 @@ function renderResultRow(guess) {
 
 playBtn.addEventListener("click", () => setMode("play"));
 dailyBtn.addEventListener("click", () => setMode("daily"));
-playAgainBtn.addEventListener("click", () => setMode(isDailyMode ? "daily" : "play"));
+playAgainBtn.addEventListener("click", () => setMode("play"));
 
 title.addEventListener("click", (e) => {
   if (e.target.id === "title") {
