@@ -4,22 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>REdle</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1 id="title">REdle</h1>
 
   <div id="home">
-    <button onclick="startGame('play')">Play</button>
+    <button onclick="startGame('normal')">Play</button>
     <button onclick="startGame('daily')">Daily</button>
   </div>
 
   <div id="game" style="display: none;">
     <div id="guessCounter">0/8</div>
-    <input list="characters" id="guessInput" placeholder="Type a character..."/>
-    <datalist id="characters"></datalist>
+    <input type="text" id="guessInput" list="characterList" placeholder="Type a character..." />
+    <datalist id="characterList"></datalist>
     <button onclick="makeGuess()">Guess</button>
-    <table id="resultsTable"></table>
+    <div id="guessTableContainer"></div>
+    <div id="resultMessage" style="font-size: 24px; margin-top: 20px;"></div>
   </div>
 
   <script src="script.js"></script>
