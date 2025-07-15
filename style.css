@@ -15,6 +15,11 @@ h1 {
   color: #f44336;
 }
 
+#guessCounter {
+  font-size: 1.25rem;
+  margin: 10px 0 0;
+}
+
 #game {
   margin-top: 20px;
 }
@@ -74,31 +79,6 @@ button {
 .match-wrong {
   background-color: #b71c1c;
   color: #fff;
-}
-
-#legend {
-  margin-top: 30px;
-  text-align: left;
-  width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-  background: #222;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-#legend h3 {
-  cursor: pointer;
-  margin: 0;
-}
-
-#legend-content {
-  display: none;
-  margin-top: 10px;
-  background-color: #1e1e1e;
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 10px;
 }
 
 /* Autocomplete dropdown styles */
