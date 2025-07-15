@@ -49,6 +49,7 @@ const dailyBtn = document.getElementById("dailyBtn");
 const homeScreen = document.getElementById("homeScreen");
 const gameScreen = document.getElementById("gameScreen");
 const title = document.getElementById("title");
+const messageBox = document.getElementById("gameMessage");
 
 function setMode(mode) {
   isDailyMode = mode === "daily";
@@ -60,6 +61,7 @@ function setMode(mode) {
   guessInput.value = "";
   guessInput.disabled = false;
   guessButton.disabled = false;
+  messageBox.textContent = "";
   currentCharacter = isDailyMode ? getDailyCharacter() : getRandomCharacter();
   guessInput.focus();
 }
@@ -117,11 +119,11 @@ function guessCharacter() {
   if (guess.name === currentCharacter.name) {
     guessInput.disabled = true;
     guessButton.disabled = true;
-    setTimeout(() => alert(`You win! The character was ${currentCharacter.name}.`), 200);
+    messageBox.textContent = `✅ You win! The character was ${currentCharacter.name}.`;
   } else if (guesses === maxGuesses) {
     guessInput.disabled = true;
     guessButton.disabled = true;
-    setTimeout(() => alert(`You lose! The character was ${currentCharacter.name}.`), 200);
+    messageBox.textContent = `❌ You lose! The character was ${currentCharacter.name}.`;
   }
 
   guessInput.value = "";
@@ -156,9 +158,11 @@ function renderResultRow(guess) {
 
 playBtn.addEventListener("click", () => setMode("play"));
 dailyBtn.addEventListener("click", () => setMode("daily"));
-title.addEventListener("click", () => {
-  homeScreen.style.display = "block";
-  gameScreen.style.display = "none";
+title.addEventListener("click", (e) => {
+  if (e.target.id === "title") {
+    homeScreen.style.display = "block";
+    gameScreen.style.display = "none";
+  }
 });
 
 guessButton.addEventListener("click", guessCharacter);
