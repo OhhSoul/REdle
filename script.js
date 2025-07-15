@@ -19,13 +19,17 @@ const characters = [
 ];
 
 let currentCharacter = null;
+let guessCount = 0;
+const maxGuesses = 8;
+
 const guessInput = document.getElementById("guessInput");
 const guessButton = document.getElementById("guessButton");
 const playAgainButton = document.getElementById("playAgain");
 const resultsDiv = document.getElementById("results");
 const charactersList = document.getElementById("charactersList");
 
-// Pick a new character randomly (not same as last)
+let table = null;
+
 function pickCharacter() {
   let newChar;
   do {
@@ -35,28 +39,25 @@ function pickCharacter() {
   clearGame();
 }
 
-// Clear input, results, buttons for a new round
 function clearGame() {
+  guessCount = 0;
   resultsDiv.innerHTML = "";
   guessInput.value = "";
   guessInput.disabled = false;
   guessButton.disabled = false;
   playAgainButton.style.display = "none";
   guessInput.focus();
-}
-
-// Display results after a guess
-function displayResults(guess) {
-  resultsDiv.innerHTML = "";
-
-  const table = document.createElement("table");
+  table = document.createElement("table");
   table.className = "table";
   table.innerHTML = `
     <tr>
       <th>Name</th><th>Debut</th><th>Playable</th><th>Faction</th><th>Gender</th>
     </tr>
   `;
+  resultsDiv.appendChild(table);
+}
 
+function displayResults(guess) {
   const debutAbbreviations = {
     "Resident Evil": "RE1",
     "Resident Evil 2": "RE2",
@@ -91,23 +92,37 @@ function displayResults(guess) {
   guessRow.appendChild(genderCell);
   table.appendChild(guessRow);
 
-  if (guess.name === currentCharacter.name) {
-    const answerRow = document.createElement("tr");
-    answerRow.style.fontWeight = "bold";
-    answerRow.innerHTML = `
-      <td><strong>Answer: ${currentCharacter.name}</strong></td>
-      <td>${debutAbbreviations[currentCharacter.debut] || currentCharacter.debut}</td>
-      <td>${currentCharacter.playable ? "Yes" : "No"}</td>
-      <td>${currentCharacter.faction}</td>
-      <td>${currentCharacter.gender}</td>
-    `;
-    table.appendChild(answerRow);
-  }
+  guessCount++;
 
-  resultsDiv.appendChild(table);
+  if (guess.name === currentCharacter.name) {
+    showAnswerRow(true);
+  } else if (guessCount >= maxGuesses) {
+    showAnswerRow(false);
+  }
 }
 
-// Filter dropdown options based on input
+function showAnswerRow(correct) {
+  const debutAbbreviations = {
+    "Resident Evil": "RE1",
+    "Resident Evil 2": "RE2",
+    "Resident Evil 3": "RE3"
+  };
+
+  const answerRow = document.createElement("tr");
+  answerRow.style.fontWeight = "bold";
+  answerRow.innerHTML = `
+    <td><strong>Answer: ${currentCharacter.name}</strong></td>
+    <td>${debutAbbreviations[currentCharacter.debut] || currentCharacter.debut}</td>
+    <td>${currentCharacter.playable ? "Yes" : "No"}</td>
+    <td>${currentCharacter.faction}</td>
+    <td>${currentCharacter.gender}</td>
+  `;
+  table.appendChild(answerRow);
+  guessInput.disabled = true;
+  guessButton.disabled = true;
+  playAgainButton.style.display = "inline-block";
+}
+
 function filterDropdownOptions(value) {
   const input = value.trim().toLowerCase();
   charactersList.innerHTML = "";
@@ -124,10 +139,12 @@ function filterDropdownOptions(value) {
 }
 
 function guessCharacter() {
-  let inputVal = guessInput.value.trim().toLowerCase();
+  if (guessInput.disabled) return;
+
+  const inputVal = guessInput.value.trim().toLowerCase();
   if (!inputVal) return;
 
-  let guess = characters.find(c =>
+  const guess = characters.find(c =>
     c.name.toLowerCase() === inputVal ||
     c.name.toLowerCase().split(" ").some(part => part === inputVal)
   );
@@ -139,11 +156,14 @@ function guessCharacter() {
 
   displayResults(guess);
 
-  if (guess.name === currentCharacter.name) {
+  if (guess.name === currentCharacter.name || guessCount >= maxGuesses) {
     guessInput.disabled = true;
     guessButton.disabled = true;
     playAgainButton.style.display = "inline-block";
   }
+
+  guessInput.value = "";
+  guessInput.focus();
 }
 
 function toggleLegend() {
@@ -155,11 +175,9 @@ guessButton.addEventListener("click", guessCharacter);
 playAgainButton.addEventListener("click", () => {
   pickCharacter();
 });
-
 guessInput.addEventListener("input", (e) => {
   filterDropdownOptions(e.target.value);
 });
-
 guessInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
