@@ -2,28 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>REdle</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="home">
-    <h1 id="title" onclick="goHome()">REdle</h1>
-    <div id="menu">
-      <button onclick="startGame(false)">Play</button>
-      <button onclick="startGame(true)">Daily</button>
-    </div>
+  <h1 id="title">REdle</h1>
+
+  <div id="homeScreen">
+    <button id="playBtn">Play</button>
+    <button id="dailyBtn">Daily</button>
   </div>
 
-  <div id="game" style="display: none;">
-    <h1 id="title" onclick="goHome()">REdle</h1>
-    <p id="guessCount">0/8</p>
-    <div id="inputArea">
-      <input type="text" id="guessInput" placeholder="Type a character..." list="characterList"/>
-      <button onclick="submitGuess()">Guess</button>
-      <datalist id="characterList"></datalist>
-    </div>
-    <div id="resultTable"></div>
+  <div id="gameScreen" style="display:none;">
+    <div id="guessCounter">0 / 8</div>
+    <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" list="charactersList" />
+    <datalist id="charactersList"></datalist>
+    <button id="guessButton">Guess</button>
+
+    <div id="results"></div>
   </div>
 
   <script src="script.js"></script>
