@@ -1,38 +1,38 @@
 const characters = [
   // Resident Evil 0
-  { name: "Rebecca Chambers", debut: "Resident Evil 0", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
-  { name: "Billy Coen", debut: "Resident Evil 0", playable: true, faction: "Civilian", gender: "Male" },
+  { name: "Rebecca Chambers", debut: "Resident Evil 0", playable: true, gender: "Female" },
+  { name: "Billy Coen", debut: "Resident Evil 0", playable: true, gender: "Male" },
 
   // Resident Evil (1996)
-  { name: "Jill Valentine", debut: "Resident Evil (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
-  { name: "Chris Redfield", debut: "Resident Evil (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Barry Burton", debut: "Resident Evil (1996)", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Albert Wesker", debut: "Resident Evil (1996)", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Jill Valentine", debut: "Resident Evil (1996)", playable: true, gender: "Female" },
+  { name: "Chris Redfield", debut: "Resident Evil (1996)", playable: true, gender: "Male" },
+  { name: "Barry Burton", debut: "Resident Evil (1996)", playable: false, gender: "Male" },
+  { name: "Albert Wesker", debut: "Resident Evil (1996)", playable: false, gender: "Male" },
 
   // Resident Evil 2 (1998)
-  { name: "Leon Kennedy", debut: "Resident Evil 2 (1998)", playable: true, faction: "Civilian", gender: "Male" },
-  { name: "Claire Redfield", debut: "Resident Evil 2 (1998)", playable: true, faction: "Civilian", gender: "Female" },
-  { name: "Ada Wong", debut: "Resident Evil 2 (1998)", playable: true, faction: "Unknown", gender: "Female" },
-  { name: "Sherry Birkin", debut: "Resident Evil 2 (1998)", playable: true, faction: "Civilian", gender: "Female" },
-  { name: "Mr. X", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Leon Kennedy", debut: "Resident Evil 2 (1998)", playable: true, gender: "Male" },
+  { name: "Claire Redfield", debut: "Resident Evil 2 (1998)", playable: true, gender: "Female" },
+  { name: "Ada Wong", debut: "Resident Evil 2 (1998)", playable: true, gender: "Female" },
+  { name: "Sherry Birkin", debut: "Resident Evil 2 (1998)", playable: true, gender: "Female" },
+  { name: "Mr. X", debut: "Resident Evil 2 (1998)", playable: false, gender: "Male" },
 
   // Resident Evil 3 (1999)
-  { name: "Carlos Oliveira", debut: "Resident Evil 3 (1999)", playable: true, faction: "U.B.C.S.", gender: "Male" },
-  { name: "Mikhail Viktor", debut: "Resident Evil 3 (1999)", playable: false, faction: "U.B.C.S.", gender: "Male" },
-  { name: "Nicholai Ginovaef", debut: "Resident Evil 3 (1999)", playable: false, faction: "U.B.C.S.", gender: "Male" },
-  { name: "Nemesis", debut: "Resident Evil 3 (1999)", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Carlos Oliveira", debut: "Resident Evil 3 (1999)", playable: true, gender: "Male" },
+  { name: "Mikhail Viktor", debut: "Resident Evil 3 (1999)", playable: false, gender: "Male" },
+  { name: "Nicholai Ginovaef", debut: "Resident Evil 3 (1999)", playable: false, gender: "Male" },
+  { name: "Nemesis", debut: "Resident Evil 3 (1999)", playable: false, gender: "Male" },
 
   // Resident Evil Code: Veronica
-  { name: "Steve Burnside", debut: "Resident Evil Code: Veronica", playable: true, faction: "Civilian", gender: "Male" },
-  { name: "Alexia Ashford", debut: "Resident Evil Code: Veronica", playable: false, faction: "Umbrella", gender: "Female" },
-  { name: "Alfred Ashford", debut: "Resident Evil Code: Veronica", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Steve Burnside", debut: "Resident Evil Code: Veronica", playable: true, gender: "Male" },
+  { name: "Alexia Ashford", debut: "Resident Evil Code: Veronica", playable: false, gender: "Female" },
+  { name: "Alfred Ashford", debut: "Resident Evil Code: Veronica", playable: false, gender: "Male" },
 
   // Resident Evil 4 (2005)
-  { name: "Ashley Graham", debut: "Resident Evil 4", playable: true, faction: "Civilian", gender: "Female" },
-  { name: "Luis Sera", debut: "Resident Evil 4", playable: false, faction: "Los Iluminados", gender: "Male" },
-  { name: "Jack Krauser", debut: "Resident Evil 4", playable: false, faction: "Los Iluminados", gender: "Male" },
-  { name: "Ramon Salazar", debut: "Resident Evil 4", playable: false, faction: "Los Iluminados", gender: "Male" },
-  { name: "Osmund Saddler", debut: "Resident Evil 4", playable: false, faction: "Los Iluminados", gender: "Male" }
+  { name: "Ashley Graham", debut: "Resident Evil 4", playable: true, gender: "Female" },
+  { name: "Luis Sera", debut: "Resident Evil 4", playable: false, gender: "Male" },
+  { name: "Jack Krauser", debut: "Resident Evil 4", playable: false, gender: "Male" },
+  { name: "Ramon Salazar", debut: "Resident Evil 4", playable: false, gender: "Male" },
+  { name: "Osmund Saddler", debut: "Resident Evil 4", playable: false, gender: "Male" }
 ];
 
 let currentCharacter = null;
@@ -50,6 +50,7 @@ const homeScreen = document.getElementById("homeScreen");
 const gameScreen = document.getElementById("gameScreen");
 const title = document.getElementById("title");
 const messageBox = document.getElementById("gameMessage");
+const playAgainBtn = document.getElementById("playAgainBtn");
 
 function setMode(mode) {
   isDailyMode = mode === "daily";
@@ -62,7 +63,9 @@ function setMode(mode) {
   guessInput.disabled = false;
   guessButton.disabled = false;
   messageBox.textContent = "";
+  playAgainBtn.style.display = "none";
   currentCharacter = isDailyMode ? getDailyCharacter() : getRandomCharacter();
+  renderHeaderRow();
   guessInput.focus();
 }
 
@@ -120,21 +123,40 @@ function guessCharacter() {
     guessInput.disabled = true;
     guessButton.disabled = true;
     messageBox.textContent = `✅ You win! The character was ${currentCharacter.name}.`;
+    playAgainBtn.style.display = "inline-block";
   } else if (guesses === maxGuesses) {
     guessInput.disabled = true;
     guessButton.disabled = true;
     messageBox.textContent = `❌ You lose! The character was ${currentCharacter.name}.`;
+    playAgainBtn.style.display = "inline-block";
   }
 
   guessInput.value = "";
   filterDropdownOptions("");
 }
 
+function renderHeaderRow() {
+  const header = document.createElement("div");
+  header.className = "result-row";
+
+  const labels = ["Name", "Game", "Playable", "Gender"];
+  labels.forEach(label => {
+    const cell = document.createElement("div");
+    cell.className = "result-box";
+    cell.textContent = label;
+    cell.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+    cell.style.fontWeight = "bold";
+    header.appendChild(cell);
+  });
+
+  resultsDiv.appendChild(header);
+}
+
 function renderResultRow(guess) {
   const row = document.createElement("div");
   row.className = "result-row";
 
-  const props = ["name", "debut", "playable", "faction", "gender"];
+  const props = ["name", "debut", "playable", "gender"];
   props.forEach(prop => {
     const cell = document.createElement("div");
     cell.classList.add("result-box");
@@ -158,6 +180,8 @@ function renderResultRow(guess) {
 
 playBtn.addEventListener("click", () => setMode("play"));
 dailyBtn.addEventListener("click", () => setMode("daily"));
+playAgainBtn.addEventListener("click", () => setMode(isDailyMode ? "daily" : "play"));
+
 title.addEventListener("click", (e) => {
   if (e.target.id === "title") {
     homeScreen.style.display = "block";
