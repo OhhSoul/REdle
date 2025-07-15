@@ -70,7 +70,7 @@ function displayResults(guess) {
   guessRow.innerHTML = `
     <td>${guess.name}</td>
     <td>${debutAbbreviations[guess.debut] || guess.debut} ${checkMatch(currentCharacter.debut, guess.debut)}</td>
-    <td>${guess.playable ? 'Yes ✅' : 'No ❌'}</td>
+    <td>${guess.playable ? 'Yes' : 'No'}</td>
     <td>${guess.faction} ${checkMatch(currentCharacter.faction, guess.faction)}</td>
     <td>${guess.gender} ${checkMatch(currentCharacter.gender, guess.gender)}</td>
   `;
@@ -83,7 +83,7 @@ function displayResults(guess) {
     answerRow.innerHTML = `
       <td><strong>Answer: ${currentCharacter.name}</strong></td>
       <td>${debutAbbreviations[currentCharacter.debut] || currentCharacter.debut}</td>
-      <td>${currentCharacter.playable ? 'Yes ✅' : 'No ❌'}</td>
+      <td>${currentCharacter.playable ? 'Yes' : 'No'}</td>
       <td>${currentCharacter.faction}</td>
       <td>${currentCharacter.gender}</td>
     `;
