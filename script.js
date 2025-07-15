@@ -38,11 +38,6 @@ const characters = [
   { name: "Merchant", debut: "Resident Evil 4 (2005)", playable: false, faction: "Neutral", gender: "Male" }
 ];
 
-// ========== CHARACTER DATA ==========
-const characters = [
-  // character list remains unchanged...
-];
-
 // ========== DAILY CHARACTER SEEDING ==========
 function getEasternTimeDateKey() {
   const now = new Date();
