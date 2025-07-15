@@ -2,12 +2,14 @@ const characters = [
   // Resident Evil 0
   { name: "Rebecca Chambers", debut: "Resident Evil 0", playable: true, gender: "Female" },
   { name: "Billy Coen", debut: "Resident Evil 0", playable: true, gender: "Male" },
+  { name: "James Marcus", debut: "Resident Evil 0", playable: false, gender: "Male" },
 
   // Resident Evil (1996)
   { name: "Jill Valentine", debut: "Resident Evil (1996)", playable: true, gender: "Female" },
   { name: "Chris Redfield", debut: "Resident Evil (1996)", playable: true, gender: "Male" },
   { name: "Barry Burton", debut: "Resident Evil (1996)", playable: false, gender: "Male" },
   { name: "Albert Wesker", debut: "Resident Evil (1996)", playable: false, gender: "Male" },
+  { name: "Brad Vickers", debut: "Resident Evil (1996)", playable: false, gender: "Male" },
 
   // Resident Evil 2 (1998)
   { name: "Leon Kennedy", debut: "Resident Evil 2 (1998)", playable: true, gender: "Male" },
@@ -15,12 +17,21 @@ const characters = [
   { name: "Ada Wong", debut: "Resident Evil 2 (1998)", playable: true, gender: "Female" },
   { name: "Sherry Birkin", debut: "Resident Evil 2 (1998)", playable: true, gender: "Female" },
   { name: "Mr. X", debut: "Resident Evil 2 (1998)", playable: false, gender: "Male" },
+  { name: "Marvin Branagh", debut: "Resident Evil 2 (1998)", playable: false, gender: "Male" },
+  { name: "Robert Kendo", debut: "Resident Evil 2 (1998)", playable: false, gender: "Male" },
+  { name: "Brian Irons", debut: "Resident Evil 2 (1998)", playable: false, gender: "Male" },
+  { name: "Ben Bertolucci", debut: "Resident Evil 2 (1998)", playable: false, gender: "Male" },
+  { name: "Annette Birkin", debut: "Resident Evil 2 (1998)", playable: false, gender: "Female" },
+  { name: "William Birkin", debut: "Resident Evil 2 (1998)", playable: false, gender: "Male" },
+  { name: "HUNK", debut: "Resident Evil 2 (1998)", playable: true, gender: "Male" },
 
   // Resident Evil 3 (1999)
   { name: "Carlos Oliveira", debut: "Resident Evil 3 (1999)", playable: true, gender: "Male" },
   { name: "Mikhail Viktor", debut: "Resident Evil 3 (1999)", playable: false, gender: "Male" },
   { name: "Nicholai Ginovaef", debut: "Resident Evil 3 (1999)", playable: false, gender: "Male" },
   { name: "Nemesis", debut: "Resident Evil 3 (1999)", playable: false, gender: "Male" },
+  { name: "Dario Rosso", debut: "Resident Evil 3 (1999)", playable: false, gender: "Male" },
+  { name: "Tyrell Patrick", debut: "Resident Evil 3 (1999)", playable: false, gender: "Male" },
 
   // Resident Evil Code: Veronica
   { name: "Steve Burnside", debut: "Resident Evil Code: Veronica", playable: true, gender: "Male" },
@@ -32,7 +43,20 @@ const characters = [
   { name: "Luis Sera", debut: "Resident Evil 4", playable: false, gender: "Male" },
   { name: "Jack Krauser", debut: "Resident Evil 4", playable: false, gender: "Male" },
   { name: "Ramon Salazar", debut: "Resident Evil 4", playable: false, gender: "Male" },
-  { name: "Osmund Saddler", debut: "Resident Evil 4", playable: false, gender: "Male" }
+  { name: "Osmund Saddler", debut: "Resident Evil 4", playable: false, gender: "Male" },
+  { name: "Ingrid Hunnigan", debut: "Resident Evil 4", playable: false, gender: "Female" },
+  { name: "Bitores Mendez", debut: "Resident Evil 4", playable: false, gender: "Male" },
+  { name: "Merchant", debut: "Resident Evil 4", playable: false, gender: "Male" },
+
+  // Resident Evil Outbreak
+  { name: "Kevin Ryman", debut: "Resident Evil Outbreak", playable: true, gender: "Male" },
+  { name: "George Hamilton", debut: "Resident Evil Outbreak", playable: true, gender: "Male" },
+  { name: "David King", debut: "Resident Evil Outbreak", playable: true, gender: "Male" },
+  { name: "Alyssa Ashcroft", debut: "Resident Evil Outbreak", playable: true, gender: "Female" },
+  { name: "Mark Wilkins", debut: "Resident Evil Outbreak", playable: true, gender: "Male" },
+  { name: "Jim Chapman", debut: "Resident Evil Outbreak", playable: true, gender: "Male" },
+  { name: "Yoko Suzuki", debut: "Resident Evil Outbreak", playable: true, gender: "Female" },
+  { name: "Cindy Lennox", debut: "Resident Evil Outbreak", playable: true, gender: "Female" }
 ];
 
 let currentCharacter = null;
