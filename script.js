@@ -37,9 +37,27 @@ const characters = [
   { name: "Merchant", debut: "Resident Evil 4 (2005)", playable: false, faction: "Neutral", gender: "Male" }
 ];
 
+// Daily feature logic
+function getDailyCharacter() {
+  const easternOffset = -5 * 60; // EST in minutes
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  const estTime = new Date(utc + 60000 * easternOffset);
+  const daySeed = estTime.toISOString().split('T')[0];
+
+  let hash = 0;
+  for (let i = 0; i < daySeed.length; i++) {
+    hash = daySeed.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % characters.length;
+  return characters[index];
+}
+
 let currentCharacter = null;
 let guessCount = 0;
 const maxGuesses = 8;
+let isDaily = false;
+let hasGuessedDaily = false;
 
 const guessInput = document.getElementById("guessInput");
 const guessButton = document.getElementById("guessButton");
@@ -51,8 +69,28 @@ const gameContainer = document.getElementById("game");
 const charactersList = document.getElementById("charactersList");
 
 function pickCharacter() {
-  currentCharacter = characters[Math.floor(Math.random() * characters.length)];
+  let newChar;
+  do {
+    newChar = characters[Math.floor(Math.random() * characters.length)];
+  } while (newChar === currentCharacter);
+  currentCharacter = newChar;
   clearGame();
+}
+
+function startDailyMode() {
+  currentCharacter = getDailyCharacter();
+  isDaily = true;
+  clearGame();
+  const lastPlayed = localStorage.getItem("lastDaily");
+  const today = new Date().toISOString().split("T")[0];
+  if (lastPlayed === today) {
+    hasGuessedDaily = true;
+    guessInput.disabled = true;
+    guessButton.disabled = true;
+    guessCounter.textContent = "Come back tomorrow for a new daily!";
+  } else {
+    hasGuessedDaily = false;
+  }
 }
 
 function clearGame() {
@@ -67,7 +105,9 @@ function clearGame() {
 }
 
 function updateGuessCounter() {
-  guessCounter.textContent = `${guessCount}/${maxGuesses}`;
+  if (!isDaily || (isDaily && !hasGuessedDaily)) {
+    guessCounter.textContent = `${guessCount}/${maxGuesses}`;
+  }
 }
 
 function createCell(value, isCorrect) {
@@ -107,7 +147,11 @@ function endGame(won) {
   resultsDiv.appendChild(msg);
   guessInput.disabled = true;
   guessButton.disabled = true;
-  playAgainButton.style.display = "inline-block";
+  if (!isDaily) playAgainButton.style.display = "inline-block";
+  if (isDaily && !hasGuessedDaily) {
+    localStorage.setItem("lastDaily", new Date().toISOString().split("T")[0]);
+    hasGuessedDaily = true;
+  }
 }
 
 function guessCharacter() {
@@ -132,8 +176,10 @@ function guessCharacter() {
   guessInput.focus();
 }
 
+// Event Listeners
 guessButton.addEventListener("click", guessCharacter);
 playAgainButton.addEventListener("click", () => {
+  isDaily = false;
   pickCharacter();
 });
 guessInput.addEventListener("keypress", (e) => {
@@ -145,13 +191,17 @@ guessInput.addEventListener("keypress", (e) => {
 document.getElementById("playButton").addEventListener("click", () => {
   modeSelector.style.display = "none";
   gameContainer.style.display = "block";
+  isDaily = false;
   pickCharacter();
 });
 document.getElementById("dailyButton").addEventListener("click", () => {
-  alert("Daily mode coming soon!");
+  modeSelector.style.display = "none";
+  gameContainer.style.display = "block";
+  startDailyMode();
 });
 document.getElementById("title").addEventListener("click", () => {
   gameContainer.style.display = "none";
   modeSelector.style.display = "block";
+  isDaily = false;
   clearGame();
 });
