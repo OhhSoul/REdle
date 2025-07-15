@@ -1,104 +1,81 @@
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
   background-image: url('background.jpg.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-position: center;
-  text-align: center;
   color: white;
-  margin: 0;
-  padding: 0;
+  text-align: center;
 }
 
-h1#title {
+#title {
   font-size: 48px;
-  margin: 20px 0 10px;
-  color: red;
+  font-weight: bold;
+  margin: 20px;
   cursor: pointer;
-  z-index: 10;
-  position: relative;
+  color: red;
+}
+
+#menu {
+  margin-top: 20px;
+}
+
+#menu button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#inputArea {
+  margin: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 250px;
+  font-size: 16px;
 }
 
 button {
-  font-size: 16px;
-  margin: 10px;
   padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
 }
 
-#guessInput {
+#resultTable {
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #fff;
   padding: 10px;
-  font-size: 16px;
-  width: 250px;
-  border-radius: 4px;
-  border: none;
-  outline: none;
-  box-shadow: 0 0 10px rgba(255,255,255,0.5);
-  transition: box-shadow 0.3s ease;
-}
-
-#guessInput:focus {
-  box-shadow: 0 0 15px rgba(255,255,255,0.8);
-}
-
-.input-container {
-  margin: 20px 0;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-#resultsHeader {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-#results {
-  margin-top: 10px;
-}
-
-.result-row {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 10px 0;
-  animation: fadeIn 0.6s ease forwards;
-  opacity: 0;
-}
-
-.result-box {
-  padding: 10px 15px;
-  border-radius: 6px;
-  font-weight: bold;
-  border: 2px solid white;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  min-width: 140px;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
-.result-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(255,255,255,0.7);
+th {
+  background-color: rgba(255, 0, 0, 0.8);
 }
 
-.correct {
-  background-color: green;
+.match {
+  background-color: green !important;
 }
 
-.incorrect {
-  background-color: red;
+.partial {
+  background-color: orange !important;
 }
 
-#endMessage {
-  font-size: 24px;
-  margin-top: 20px;
-  font-weight: bold;
-  color: white;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.wrong {
+  background-color: red !important;
 }
