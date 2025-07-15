@@ -49,7 +49,6 @@ function clearGame() {
 function displayResults(guess) {
   resultsDiv.innerHTML = "";
 
-  // Table headers
   const table = document.createElement("table");
   table.className = "table";
   table.innerHTML = `
@@ -58,32 +57,47 @@ function displayResults(guess) {
     </tr>
   `;
 
-  // Abbreviation map for debut titles
   const debutAbbreviations = {
     "Resident Evil": "RE1",
     "Resident Evil 2": "RE2",
     "Resident Evil 3": "RE3"
   };
 
-  // Guessed character row
   const guessRow = document.createElement("tr");
-  guessRow.innerHTML = `
-    <td>${guess.name}</td>
-    <td>${debutAbbreviations[guess.debut] || guess.debut} ${checkMatch(currentCharacter.debut, guess.debut)}</td>
-    <td>${guess.playable ? 'Yes' : 'No'}</td>
-    <td>${guess.faction} ${checkMatch(currentCharacter.faction, guess.faction)}</td>
-    <td>${guess.gender} ${checkMatch(currentCharacter.gender, guess.gender)}</td>
-  `;
+
+  const nameCell = document.createElement("td");
+  nameCell.textContent = guess.name;
+
+  const debutCell = document.createElement("td");
+  debutCell.textContent = debutAbbreviations[guess.debut] || guess.debut;
+  debutCell.className = guess.debut === currentCharacter.debut ? "match-correct" : "match-wrong";
+
+  const playableCell = document.createElement("td");
+  playableCell.textContent = guess.playable ? "Yes" : "No";
+  playableCell.className = guess.playable === currentCharacter.playable ? "match-correct" : "match-wrong";
+
+  const factionCell = document.createElement("td");
+  factionCell.textContent = guess.faction;
+  factionCell.className = guess.faction === currentCharacter.faction ? "match-correct" : "match-wrong";
+
+  const genderCell = document.createElement("td");
+  genderCell.textContent = guess.gender;
+  genderCell.className = guess.gender === currentCharacter.gender ? "match-correct" : "match-wrong";
+
+  guessRow.appendChild(nameCell);
+  guessRow.appendChild(debutCell);
+  guessRow.appendChild(playableCell);
+  guessRow.appendChild(factionCell);
+  guessRow.appendChild(genderCell);
   table.appendChild(guessRow);
 
-  // If correct guess, show answer row
   if (guess.name === currentCharacter.name) {
     const answerRow = document.createElement("tr");
     answerRow.style.fontWeight = "bold";
     answerRow.innerHTML = `
       <td><strong>Answer: ${currentCharacter.name}</strong></td>
       <td>${debutAbbreviations[currentCharacter.debut] || currentCharacter.debut}</td>
-      <td>${currentCharacter.playable ? 'Yes' : 'No'}</td>
+      <td>${currentCharacter.playable ? "Yes" : "No"}</td>
       <td>${currentCharacter.faction}</td>
       <td>${currentCharacter.gender}</td>
     `;
@@ -93,21 +107,12 @@ function displayResults(guess) {
   resultsDiv.appendChild(table);
 }
 
-// Check if guessed value matches the answer, return check or cross
-function checkMatch(answerVal, guessVal) {
-  return answerVal === guessVal ? '✔️' : '❌';
-}
-
 // Filter dropdown options based on input
 function filterDropdownOptions(value) {
   const input = value.trim().toLowerCase();
-
-  // Clear current options
   charactersList.innerHTML = "";
-
   if (input.length === 0) return;
 
-  // Only add names whose first or last name starts with the input letter
   characters.forEach(char => {
     const parts = char.name.toLowerCase().split(" ");
     if (parts.some(part => part.startsWith(input))) {
@@ -118,13 +123,10 @@ function filterDropdownOptions(value) {
   });
 }
 
-// Guess logic
 function guessCharacter() {
   let inputVal = guessInput.value.trim().toLowerCase();
-
   if (!inputVal) return;
 
-  // Find character by full name or partial first/last name (case-insensitive)
   let guess = characters.find(c =>
     c.name.toLowerCase() === inputVal ||
     c.name.toLowerCase().split(" ").some(part => part === inputVal)
@@ -137,7 +139,6 @@ function guessCharacter() {
 
   displayResults(guess);
 
-  // If correct guess
   if (guess.name === currentCharacter.name) {
     guessInput.disabled = true;
     guessButton.disabled = true;
@@ -145,13 +146,11 @@ function guessCharacter() {
   }
 }
 
-// Toggle legend visibility
 function toggleLegend() {
   const legendContent = document.getElementById("legend-content");
   legendContent.style.display = legendContent.style.display === "none" || legendContent.style.display === "" ? "block" : "none";
 }
 
-// Event Listeners
 guessButton.addEventListener("click", guessCharacter);
 playAgainButton.addEventListener("click", () => {
   pickCharacter();
@@ -163,10 +162,9 @@ guessInput.addEventListener("input", (e) => {
 
 guessInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    e.preventDefault(); // prevent form submit if any
+    e.preventDefault();
     guessCharacter();
   }
 });
 
-// Initialize game
 pickCharacter();
