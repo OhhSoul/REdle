@@ -65,7 +65,8 @@ th, td {
 }
 
 th {
-  background-color: rgba(255, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 .match {
@@ -78,4 +79,27 @@ th {
 
 .wrong {
   background-color: red !important;
+}
+
+#guessCounter {
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+#message {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: yellow;
+}
+
+#playAgainBtn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
 }
