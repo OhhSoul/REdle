@@ -70,7 +70,7 @@ function getRandomCharacter() {
 
 function getDailyCharacter() {
   const now = new Date();
-  now.setUTCHours(now.getUTCHours() - 4); // Convert to Eastern Time
+  now.setUTCHours(now.getUTCHours() - 4); // Eastern Time
   const seed = now.toISOString().split("T")[0];
   const hash = Array.from(seed).reduce((acc, char) => acc + char.charCodeAt(0), 0);
   return characters[hash % characters.length];
@@ -83,8 +83,7 @@ function filterDropdownOptions(value) {
   if (input.length === 0) return;
 
   characters.forEach(char => {
-    const parts = char.name.toLowerCase().split(" ");
-    if (parts.some(part => part.startsWith(input))) {
+    if (char.name.toLowerCase().includes(input)) {
       const option = document.createElement("option");
       option.value = char.name;
       dataList.appendChild(option);
@@ -92,11 +91,20 @@ function filterDropdownOptions(value) {
   });
 }
 
+function matchCharacter(inputVal) {
+  const lowerInput = inputVal.trim().toLowerCase();
+  return characters.find(c => {
+    const fullName = c.name.toLowerCase();
+    const parts = fullName.split(" ");
+    return fullName === lowerInput || parts.includes(lowerInput);
+  });
+}
+
 function guessCharacter() {
   if (guesses >= maxGuesses) return;
 
-  const inputVal = guessInput.value.trim().toLowerCase();
-  const guess = characters.find(c => c.name.toLowerCase() === inputVal);
+  const inputVal = guessInput.value;
+  const guess = matchCharacter(inputVal);
   if (!guess) {
     alert("Character not found.");
     return;
@@ -131,14 +139,13 @@ function renderResultRow(guess) {
 
     const value = guess[prop];
     const actual = currentCharacter[prop];
-    cell.textContent = (prop === "playable")
-      ? (value ? "Yes" : "No")
-      : value;
+
+    cell.textContent = prop === "playable" ? (value ? "Yes" : "No") : value;
 
     if (value === actual) {
-      cell.classList.add("correct");
+      cell.classList.add("match");
     } else {
-      cell.classList.add("incorrect");
+      cell.classList.add("wrong");
     }
 
     row.appendChild(cell);
