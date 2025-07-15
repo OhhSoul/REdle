@@ -1,10 +1,11 @@
+// ========== CHARACTER DATA ==========
 const characters = [
-  { name: "Chris Redfield", debut: "Resident Evil 1 (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Jill Valentine", debut: "Resident Evil 1 (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
-  { name: "Barry Burton", debut: "Resident Evil 1 (1996)", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Rebecca Chambers", debut: "Resident Evil 1 (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
-  { name: "Albert Wesker", debut: "Resident Evil 1 (1996)", playable: false, faction: "Umbrella", gender: "Male" },
-  { name: "Brad Vickers", debut: "Resident Evil 1 (1996)", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Chris Redfield", debut: "Resident Evil (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Jill Valentine", debut: "Resident Evil (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
+  { name: "Barry Burton", debut: "Resident Evil (1996)", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Rebecca Chambers", debut: "Resident Evil (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
+  { name: "Albert Wesker", debut: "Resident Evil (1996)", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Brad Vickers", debut: "Resident Evil (1996)", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
   { name: "Leon Kennedy", debut: "Resident Evil 2 (1998)", playable: true, faction: "Civilian", gender: "Male" },
   { name: "Claire Redfield", debut: "Resident Evil 2 (1998)", playable: true, faction: "Civilian", gender: "Female" },
   { name: "Ada Wong", debut: "Resident Evil 2 (1998)", playable: true, faction: "Independent", gender: "Female" },
@@ -13,195 +14,178 @@ const characters = [
   { name: "Annette Birkin", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Female" },
   { name: "William Birkin", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Male" },
   { name: "Marvin Branagh", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Male" },
-  { name: "HUNK", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Male" },
-  { name: "Sherry Birkin", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Female" },
-  { name: "Brian Irons", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Male" },
-  { name: "Mr. X", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Male" },
   { name: "Carlos Oliveira", debut: "Resident Evil 3 (1999)", playable: true, faction: "U.B.C.S.", gender: "Male" },
   { name: "Nicholai Ginovaef", debut: "Resident Evil 3 (1999)", playable: false, faction: "U.B.C.S.", gender: "Male" },
   { name: "Mikhail Victor", debut: "Resident Evil 3 (1999)", playable: false, faction: "U.B.C.S.", gender: "Male" },
+  { name: "HUNK", debut: "Resident Evil 2 (1998)", playable: true, faction: "Umbrella", gender: "Male" },
+  { name: "Sherry Birkin", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Female" },
+  { name: "Brian Irons", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "Mr. X", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Male" },
   { name: "Dario Rosso", debut: "Resident Evil 3 (1999)", playable: false, faction: "Civilian", gender: "Male" },
   { name: "Nemesis", debut: "Resident Evil 3 (1999)", playable: false, faction: "Umbrella", gender: "Male" },
-  { name: "Billy Coen", debut: "Resident Evil 0", playable: true, faction: "Civilian", gender: "Male" },
-  { name: "James Marcus", debut: "Resident Evil 0", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Billy Coen", debut: "Resident Evil Zero", playable: true, faction: "Civilian", gender: "Male" },
+  { name: "James Marcus", debut: "Resident Evil Zero", playable: false, faction: "Umbrella", gender: "Male" },
   { name: "Steve Burnside", debut: "Resident Evil Code Veronica", playable: true, faction: "Civilian", gender: "Male" },
   { name: "Alexia Ashford", debut: "Resident Evil Code Veronica", playable: false, faction: "Umbrella", gender: "Female" },
   { name: "Alfred Ashford", debut: "Resident Evil Code Veronica", playable: false, faction: "Umbrella", gender: "Male" },
   { name: "Ashley Graham", debut: "Resident Evil 4 (2005)", playable: true, faction: "Civilian", gender: "Female" },
   { name: "Ramon Salazar", debut: "Resident Evil 4 (2005)", playable: false, faction: "Los Illuminados", gender: "Male" },
   { name: "Osmund Saddler", debut: "Resident Evil 4 (2005)", playable: false, faction: "Los Illuminados", gender: "Male" },
-  { name: "Ingrid Hunnigan", debut: "Resident Evil 4 (2005)", playable: false, faction: "Government", gender: "Female" },
-  { name: "Luis Sera", debut: "Resident Evil 4 (2005)", playable: false, faction: "Los Illuminados", gender: "Male" },
+  { name: "Ingrid Hunnigan", debut: "Resident Evil 4 (2005)", playable: false, faction: "U.S. Government", gender: "Female" },
+  { name: "Luis Sera", debut: "Resident Evil 4 (2005)", playable: false, faction: "Civilian", gender: "Male" },
   { name: "Bitores Mendez", debut: "Resident Evil 4 (2005)", playable: false, faction: "Los Illuminados", gender: "Male" },
   { name: "Jack Krauser", debut: "Resident Evil 4 (2005)", playable: false, faction: "Los Illuminados", gender: "Male" },
   { name: "Merchant", debut: "Resident Evil 4 (2005)", playable: false, faction: "Neutral", gender: "Male" }
 ];
 
-// Daily feature logic
-function getDailyCharacter() {
-  const easternOffset = -5 * 60; // EST in minutes
+// ========== DAILY CHARACTER SEEDING ==========
+function getEasternTimeDateKey() {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const estTime = new Date(utc + 60000 * easternOffset);
-  const daySeed = estTime.toISOString().split('T')[0];
+  const easternOffset = -4 * 60; // EDT
+  const eastern = new Date(utc + 60000 * easternOffset);
+  return eastern.toISOString().split("T")[0];
+}
 
-  let hash = 0;
-  for (let i = 0; i < daySeed.length; i++) {
-    hash = daySeed.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  const index = Math.abs(hash) % characters.length;
+function seededRandom(seed) {
+  let x = Math.sin(seed.length) * 10000;
+  return x - Math.floor(x);
+}
+
+function getDailyCharacter() {
+  const dateKey = getEasternTimeDateKey();
+  const index = Math.floor(seededRandom(dateKey) * characters.length);
   return characters[index];
 }
 
+// ========== GAME LOGIC ==========
 let currentCharacter = null;
-let guessCount = 0;
-const maxGuesses = 8;
+let guesses = [];
+let maxGuesses = 8;
 let isDaily = false;
-let hasGuessedDaily = false;
 
 const guessInput = document.getElementById("guessInput");
 const guessButton = document.getElementById("guessButton");
-const playAgainButton = document.getElementById("playAgain");
 const resultsDiv = document.getElementById("results");
-const guessCounter = document.getElementById("guessCounter");
-const modeSelector = document.getElementById("modeSelector");
-const gameContainer = document.getElementById("game");
+const playAgainButton = document.getElementById("playAgain");
 const charactersList = document.getElementById("charactersList");
+const guessCounter = document.getElementById("guessCounter");
+const title = document.getElementById("title");
+const dailyButton = document.getElementById("dailyButton");
+const playButton = document.getElementById("playButton");
+const homeDiv = document.getElementById("home");
+const gameDiv = document.getElementById("game");
 
-function pickCharacter() {
-  let newChar;
-  do {
-    newChar = characters[Math.floor(Math.random() * characters.length)];
-  } while (newChar === currentCharacter);
-  currentCharacter = newChar;
-  clearGame();
-}
+function startGame(mode) {
+  isDaily = mode === "daily";
+  homeDiv.style.display = "none";
+  gameDiv.style.display = "block";
 
-function startDailyMode() {
-  currentCharacter = getDailyCharacter();
-  isDaily = true;
-  clearGame();
-  const lastPlayed = localStorage.getItem("lastDaily");
-  const today = new Date().toISOString().split("T")[0];
-  if (lastPlayed === today) {
-    hasGuessedDaily = true;
-    guessInput.disabled = true;
-    guessButton.disabled = true;
-    guessCounter.textContent = "Come back tomorrow for a new daily!";
-  } else {
-    hasGuessedDaily = false;
-  }
-}
-
-function clearGame() {
+  currentCharacter = isDaily ? getDailyCharacter() : pickRandomCharacter();
+  guesses = [];
   resultsDiv.innerHTML = "";
   guessInput.value = "";
   guessInput.disabled = false;
   guessButton.disabled = false;
   playAgainButton.style.display = "none";
-  guessCount = 0;
-  updateGuessCounter();
-  document.getElementById("endMessage")?.remove();
+  updateCounter();
+  guessInput.focus();
 }
 
-function updateGuessCounter() {
-  if (!isDaily || (isDaily && !hasGuessedDaily)) {
-    guessCounter.textContent = `${guessCount}/${maxGuesses}`;
-  }
+dailyButton.addEventListener("click", () => startGame("daily"));
+playButton.addEventListener("click", () => startGame("play"));
+title.addEventListener("click", () => {
+  homeDiv.style.display = "block";
+  gameDiv.style.display = "none";
+});
+
+function pickRandomCharacter() {
+  let newChar;
+  do {
+    newChar = characters[Math.floor(Math.random() * characters.length)];
+  } while (newChar === currentCharacter);
+  return newChar;
 }
 
-function createCell(value, isCorrect) {
-  const cell = document.createElement("td");
-  cell.textContent = value;
-  cell.className = isCorrect ? "correct-cell" : "incorrect-cell";
-  return cell;
+function updateCounter() {
+  guessCounter.textContent = `${guesses.length}/${maxGuesses}`;
 }
 
 function displayResults(guess) {
   const table = document.createElement("table");
   table.className = "table";
-
-  const headerRow = document.createElement("tr");
-  ["Name", "Debut", "Playable", "Faction", "Gender"].forEach(h => {
-    const th = document.createElement("th");
-    th.textContent = h;
-    headerRow.appendChild(th);
-  });
-  table.appendChild(headerRow);
+  table.innerHTML = `
+    <tr>
+      <th>Name</th><th>Debut</th><th>Playable</th><th>Faction</th><th>Gender</th>
+    </tr>
+  `;
 
   const row = document.createElement("tr");
-  row.appendChild(document.createElement("td")).textContent = guess.name;
-  row.appendChild(createCell(guess.debut, guess.debut === currentCharacter.debut));
-  row.appendChild(createCell(guess.playable ? "Yes" : "No", guess.playable === currentCharacter.playable));
-  row.appendChild(createCell(guess.faction, guess.faction === currentCharacter.faction));
-  row.appendChild(createCell(guess.gender, guess.gender === currentCharacter.gender));
-  table.appendChild(row);
+  row.innerHTML = `
+    <td>${guess.name}</td>
+    <td class="${getMatchClass(guess.debut, currentCharacter.debut)}">${guess.debut}</td>
+    <td class="${getMatchClass(guess.playable, currentCharacter.playable)}">${guess.playable ? "Yes" : "No"}</td>
+    <td class="${getMatchClass(guess.faction, currentCharacter.faction)}">${guess.faction}</td>
+    <td class="${getMatchClass(guess.gender, currentCharacter.gender)}">${guess.gender}</td>
+  `;
 
+  table.appendChild(row);
   resultsDiv.appendChild(table);
 }
 
-function endGame(won) {
-  const msg = document.createElement("div");
-  msg.id = "endMessage";
-  msg.textContent = won ? `You win! The answer was ${currentCharacter.name}.` : `You lose! The answer was ${currentCharacter.name}.`;
-  resultsDiv.appendChild(msg);
-  guessInput.disabled = true;
-  guessButton.disabled = true;
-  if (!isDaily) playAgainButton.style.display = "inline-block";
-  if (isDaily && !hasGuessedDaily) {
-    localStorage.setItem("lastDaily", new Date().toISOString().split("T")[0]);
-    hasGuessedDaily = true;
-  }
+function getMatchClass(a, b) {
+  return a === b ? "correct" : "incorrect";
 }
 
 function guessCharacter() {
-  const inputVal = guessInput.value.trim().toLowerCase();
-  const guess = characters.find(c => c.name.toLowerCase() === inputVal);
-  if (!guess) {
-    alert("Character not found. Try again.");
+  const input = guessInput.value.trim().toLowerCase();
+  if (!input || guesses.length >= maxGuesses) return;
+
+  const match = characters.find(c =>
+    c.name.toLowerCase() === input ||
+    c.name.toLowerCase().split(" ").some(part => part === input)
+  );
+
+  if (!match) {
+    alert("Character not found.");
     return;
   }
 
-  displayResults(guess);
-  guessCount++;
-  updateGuessCounter();
-
-  if (guess.name === currentCharacter.name) {
-    endGame(true);
-  } else if (guessCount >= maxGuesses) {
-    endGame(false);
-  }
-
+  guesses.push(match);
+  displayResults(match);
+  updateCounter();
   guessInput.value = "";
-  guessInput.focus();
+
+  if (match.name === currentCharacter.name) {
+    guessInput.disabled = true;
+    guessButton.disabled = true;
+    resultsDiv.innerHTML += `<h2 class='result-message win'>You Win!</h2>`;
+    playAgainButton.style.display = isDaily ? "none" : "block";
+  } else if (guesses.length >= maxGuesses) {
+    guessInput.disabled = true;
+    guessButton.disabled = true;
+    resultsDiv.innerHTML += `<h2 class='result-message lose'>You Lose! The answer was ${currentCharacter.name}</h2>`;
+    playAgainButton.style.display = isDaily ? "none" : "block";
+  }
 }
 
-// Event Listeners
+function filterDropdownOptions(value) {
+  const input = value.trim().toLowerCase();
+  charactersList.innerHTML = "";
+  if (!input) return;
+  characters.forEach(char => {
+    const parts = char.name.toLowerCase().split(" ");
+    if (parts.some(p => p.startsWith(input))) {
+      const option = document.createElement("option");
+      option.value = char.name;
+      charactersList.appendChild(option);
+    }
+  });
+}
+
 guessButton.addEventListener("click", guessCharacter);
-playAgainButton.addEventListener("click", () => {
-  isDaily = false;
-  pickCharacter();
-});
-guessInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    guessCharacter();
-  }
-});
-document.getElementById("playButton").addEventListener("click", () => {
-  modeSelector.style.display = "none";
-  gameContainer.style.display = "block";
-  isDaily = false;
-  pickCharacter();
-});
-document.getElementById("dailyButton").addEventListener("click", () => {
-  modeSelector.style.display = "none";
-  gameContainer.style.display = "block";
-  startDailyMode();
-});
-document.getElementById("title").addEventListener("click", () => {
-  gameContainer.style.display = "none";
-  modeSelector.style.display = "block";
-  isDaily = false;
-  clearGame();
+playAgainButton.addEventListener("click", () => startGame("play"));
+guessInput.addEventListener("input", e => filterDropdownOptions(e.target.value));
+guessInput.addEventListener("keypress", e => {
+  if (e.key === "Enter") guessCharacter();
 });
