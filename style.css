@@ -14,7 +14,10 @@ h1 {
   font-size: 48px;
   color: #f44336;
   text-shadow: 2px 2px 4px #000;
+  display: inline;           /* NEW */
+  cursor: pointer;           /* NEW - hand icon to signal clickability */
 }
+
 
 #modeSelector {
   margin-top: 30px;
