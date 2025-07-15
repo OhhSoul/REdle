@@ -1,52 +1,32 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background: url('background.jpg.jpg') no-repeat center center fixed;
-  background-size: cover;
   background-color: #121212;
   color: #eee;
   margin: 0;
   padding: 0;
+  background-image: url("background.jpg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: brightness(40%);
 }
 
 h1 {
   margin-top: 30px;
-  font-size: 48px;
+  font-size: 60px;
   color: #f44336;
   text-shadow: 2px 2px 4px #000;
-  display: inline;           /* NEW */
-  cursor: pointer;           /* NEW - hand icon to signal clickability */
+  display: inline;
+  cursor: pointer;
 }
-
 
 #modeSelector {
-  margin-top: 30px;
-}
-
-#modeSelector button {
-  padding: 15px 30px;
-  margin: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  background-color: #333;
-  color: #eee;
-  border: none;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-}
-
-#modeSelector button:hover {
-  background-color: #555;
+  margin-top: 20px;
 }
 
 #game {
   margin-top: 20px;
-}
-
-#guessCounter {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #ccc;
 }
 
 input[type="text"] {
@@ -59,27 +39,19 @@ button {
   padding: 10px 20px;
   margin-left: 10px;
   cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  background-color: #444;
-  color: #eee;
-}
-
-button:hover {
-  background-color: #666;
 }
 
 #results {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .table {
-  display: inline-block;
   margin-top: 20px;
   border-collapse: collapse;
   background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 .table th,
@@ -89,37 +61,25 @@ button:hover {
   min-width: 100px;
 }
 
-.correct {
-  background-color: #2e7d32; /* Green */
-  color: #fff;
+.correct-cell {
+  background-color: #4caf50 !important;
+  color: white;
 }
 
-.incorrect {
-  background-color: #c62828; /* Red */
-  color: #fff;
+.incorrect-cell {
+  background-color: #f44336 !important;
+  color: white;
 }
 
-/* Autocomplete dropdown styles */
-.autocomplete-items {
-  position: absolute;
-  border: 1px solid #ddd;
-  border-top: none;
-  z-index: 99;
-  top: 40px;
-  left: 0;
-  right: 0;
-  background-color: #222;
-  max-height: 150px;
-  overflow-y: auto;
-  color: #eee;
-  box-sizing: border-box;
+#guessCounter {
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
 }
 
-.autocomplete-items div {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.autocomplete-items div:hover {
-  background-color: #444;
+#endMessage {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 30px;
+  color: white;
 }
