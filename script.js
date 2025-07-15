@@ -134,13 +134,15 @@ function filterDropdownOptions(value) {
   if (input.length === 0) return;
 
   characters.forEach(char => {
-    if (char.name.toLowerCase().includes(input)) {
+    const [first, last] = char.name.toLowerCase().split(" ");
+    if (first.startsWith(input) || (last && last.startsWith(input))) {
       const option = document.createElement("option");
       option.value = char.name;
       dataList.appendChild(option);
     }
   });
 }
+
 
 function matchCharacter(inputVal) {
   const lowerInput = inputVal.trim().toLowerCase();
