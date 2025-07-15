@@ -1,39 +1,48 @@
-/* === style.css === */
-
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background: url('background.jpg.jpg') no-repeat center center fixed;
-  background-size: cover;
+  background-color: #121212;
   color: #eee;
   margin: 0;
   padding: 0;
+  background-image: url("background.jpg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  backdrop-filter: brightness(0.5);
 }
 
 h1 {
   margin-top: 20px;
   color: #f44336;
   font-size: 48px;
-  cursor: pointer;
   display: inline-block;
+  cursor: pointer;
 }
 
-#game-container {
-  margin-top: 10px;
-  position: relative;
-  z-index: 2;
+#counter {
+  margin-top: 5px;
+  font-size: 18px;
 }
 
-#guessInput {
-  padding: 10px;
-  width: 200px;
-  box-sizing: border-box;
+#home {
+  margin-top: 40px;
 }
 
 button {
   padding: 10px 20px;
-  margin-left: 10px;
+  margin: 10px;
   cursor: pointer;
+}
+
+#game {
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 200px;
+  box-sizing: border-box;
 }
 
 #results {
@@ -41,10 +50,12 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
 }
 
 .table {
+  display: table;
+  margin: 0 auto;
   border-collapse: collapse;
   background-color: rgba(0, 0, 0, 0.6);
 }
@@ -53,44 +64,28 @@ button {
 .table td {
   border: 1px solid #555;
   padding: 8px 12px;
-  min-width: 100px;
 }
 
 .correct {
-  background-color: #4caf50 !important;
-  color: #fff;
+  background-color: #4caf50;
+  color: white;
 }
 
 .incorrect {
-  background-color: #f44336 !important;
-  color: #fff;
+  background-color: #f44336;
+  color: white;
 }
 
 .partial {
-  background-color: orange !important;
-  color: #fff;
+  background-color: orange;
+  color: white;
 }
 
-#counter {
-  margin-top: 5px;
-  font-size: 18px;
-}
-
-#home-buttons button {
-  margin: 10px;
-}
-
-#home-buttons {
-  margin-top: 30px;
-}
-
-#end-screen {
+#playAgain {
+  display: none;
   margin-top: 20px;
-  font-size: 24px;
-  font-weight: bold;
 }
 
-/* Autocomplete dropdown styles */
 .autocomplete-items {
   position: absolute;
   border: 1px solid #ddd;
@@ -113,4 +108,14 @@ button {
 
 .autocomplete-items div:hover {
   background-color: #444;
+}
+
+#endScreen {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 32px;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  display: none;
 }
