@@ -1,5 +1,4 @@
 const characters = [
-const characters = [
   { name: "Chris Redfield", debut: "Resident Evil", playable: true, faction: "S.T.A.R.S.", gender: "Male" },
   { name: "Jill Valentine", debut: "Resident Evil", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
   { name: "Barry Burton", debut: "Resident Evil", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
