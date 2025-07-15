@@ -89,13 +89,16 @@ th {
 }
 
 .result-box {
-  padding: 10px;
+  flex: 1;
+  max-width: 150px;
   min-width: 100px;
+  padding: 10px;
   background-color: rgba(255, 255, 255, 0.1);
   border: 2px solid white;
   border-radius: 8px;
   font-weight: bold;
   color: white;
+  text-align: center;
 }
 
 /* Game message */
@@ -104,4 +107,13 @@ th {
   font-size: 20px;
   font-weight: bold;
   color: white;
+}
+
+/* Play again button */
+#playAgainBtn {
+  margin-top: 10px;
+  background-color: #444;
+  color: white;
+  border: 2px solid white;
+  border-radius: 8px;
 }
