@@ -1,32 +1,32 @@
 const characters = [
   // RE1
-  { name: "Chris Redfield", debut: "Resident Evil", playable: true, faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Jill Valentine", debut: "Resident Evil", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
-  { name: "Barry Burton", debut: "Resident Evil", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
-  { name: "Rebecca Chambers", debut: "Resident Evil", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
-  { name: "Albert Wesker", debut: "Resident Evil", playable: false, faction: "Umbrella", gender: "Male" },
-  { name: "Brad Vickers", debut: "Resident Evil", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Chris Redfield", debut: "Resident Evil (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Jill Valentine", debut: "Resident Evil (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
+  { name: "Barry Burton", debut: "Resident Evil (1996)", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
+  { name: "Rebecca Chambers", debut: "Resident Evil (1996)", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
+  { name: "Albert Wesker", debut: "Resident Evil (1996)", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Brad Vickers", debut: "Resident Evil (1996)", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
 
   // RE2
-  { name: "Leon Kennedy", debut: "Resident Evil 2", playable: true, faction: "Civilian", gender: "Male" },
-  { name: "Claire Redfield", debut: "Resident Evil 2", playable: true, faction: "Civilian", gender: "Female" },
-  { name: "Ada Wong", debut: "Resident Evil 2", playable: true, faction: "Independent", gender: "Female" },
-  { name: "Robert Kendo", debut: "Resident Evil 2", playable: false, faction: "Civilian", gender: "Male" },
-  { name: "Ben Bertolucci", debut: "Resident Evil 2", playable: false, faction: "Civilian", gender: "Male" },
-  { name: "HUNK", debut: "Resident Evil 2", playable: true, faction: "Umbrella", gender: "Male" },
-  { name: "Sherry Birkin", debut: "Resident Evil 2", playable: true, faction: "Civilian", gender: "Female" },
-  { name: "Brian Irons", debut: "Resident Evil 2", playable: false, faction: "Civilian", gender: "Male" },
-  { name: "Mr. X", debut: "Resident Evil 2", playable: false, faction: "Umbrella", gender: "Male" },
-  { name: "Annette Birkin", debut: "Resident Evil 2", playable: false, faction: "Umbrella", gender: "Female" },
-  { name: "William Birkin", debut: "Resident Evil 2", playable: false, faction: "Umbrella", gender: "Male" },
-  { name: "Marvin Branagh", debut: "Resident Evil 2", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "Leon Kennedy", debut: "Resident Evil 2 (1998)", playable: true, faction: "Civilian", gender: "Male" },
+  { name: "Claire Redfield", debut: "Resident Evil 2 (1998)", playable: true, faction: "Civilian", gender: "Female" },
+  { name: "Ada Wong", debut: "Resident Evil 2 (1998)", playable: true, faction: "Independent", gender: "Female" },
+  { name: "Robert Kendo", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "Ben Bertolucci", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "HUNK", debut: "Resident Evil 2 (1998)", playable: true, faction: "Umbrella", gender: "Male" },
+  { name: "Sherry Birkin", debut: "Resident Evil 2 (1998)", playable: true, faction: "Civilian", gender: "Female" },
+  { name: "Brian Irons", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "Mr. X", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Annette Birkin", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Female" },
+  { name: "William Birkin", debut: "Resident Evil 2 (1998)", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Marvin Branagh", debut: "Resident Evil 2 (1998)", playable: false, faction: "Civilian", gender: "Male" },
 
   // RE3
-  { name: "Carlos Oliveira", debut: "Resident Evil 3", playable: true, faction: "U.B.C.S.", gender: "Male" },
-  { name: "Nicholai Ginovaef", debut: "Resident Evil 3", playable: false, faction: "U.B.C.S.", gender: "Male" },
-  { name: "Mikhail Victor", debut: "Resident Evil 3", playable: false, faction: "U.B.C.S.", gender: "Male" },
-  { name: "Dario Rosso", debut: "Resident Evil 3", playable: false, faction: "Civilian", gender: "Male" },
-  { name: "Nemesis", debut: "Resident Evil 3", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "Carlos Oliveira", debut: "Resident Evil 3 (1999)", playable: true, faction: "U.B.C.S.", gender: "Male" },
+  { name: "Nicholai Ginovaef", debut: "Resident Evil 3 (1999)", playable: false, faction: "U.B.C.S.", gender: "Male" },
+  { name: "Mikhail Victor", debut: "Resident Evil 3 (1999)", playable: false, faction: "U.B.C.S.", gender: "Male" },
+  { name: "Dario Rosso", debut: "Resident Evil 3 (1999)", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "Nemesis", debut: "Resident Evil 3 (1999)", playable: false, faction: "Umbrella", gender: "Male" },
 
   // RE0
   { name: "Billy Coen", debut: "Resident Evil 0", playable: true, faction: "Civilian", gender: "Male" },
@@ -38,14 +38,14 @@ const characters = [
   { name: "Alfred Ashford", debut: "Resident Evil Code: Veronica", playable: false, faction: "Umbrella", gender: "Male" },
 
   // RE4
-  { name: "Ashley Graham", debut: "Resident Evil 4", playable: true, faction: "Civilian", gender: "Female" },
-  { name: "Ramón Salazar", debut: "Resident Evil 4", playable: false, faction: "Los Iluminados", gender: "Male" },
-  { name: "Osmund Saddler", debut: "Resident Evil 4", playable: false, faction: "Los Iluminados", gender: "Male" },
-  { name: "Ingrid Hunnigan", debut: "Resident Evil 4", playable: false, faction: "Government", gender: "Female" },
-  { name: "Luis Sera", debut: "Resident Evil 4", playable: false, faction: "Civilian", gender: "Male" },
-  { name: "Bitores Mendez", debut: "Resident Evil 4", playable: false, faction: "Los Iluminados", gender: "Male" },
-  { name: "Jack Krauser", debut: "Resident Evil 4", playable: false, faction: "Umbrella", gender: "Male" },
-  { name: "The Merchant", debut: "Resident Evil 4", playable: false, faction: "Unknown", gender: "Male" }
+  { name: "Ashley Graham", debut: "Resident Evil 4 (2005)", playable: true, faction: "Civilian", gender: "Female" },
+  { name: "Ramón Salazar", debut: "Resident Evil 4 (2005)", playable: false, faction: "Los Iluminados", gender: "Male" },
+  { name: "Osmund Saddler", debut: "Resident Evil 4 (2005)", playable: false, faction: "Los Iluminados", gender: "Male" },
+  { name: "Ingrid Hunnigan", debut: "Resident Evil 4 (2005)", playable: false, faction: "Government", gender: "Female" },
+  { name: "Luis Sera", debut: "Resident Evil 4 (2005)", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "Bitores Mendez", debut: "Resident Evil 4 (2005)", playable: false, faction: "Los Iluminados", gender: "Male" },
+  { name: "Jack Krauser", debut: "Resident Evil 4 (2005)", playable: false, faction: "Umbrella", gender: "Male" },
+  { name: "The Merchant", debut: "Resident Evil 4 (2005)", playable: false, faction: "Unknown", gender: "Male" }
 ];
 
 let currentCharacter = null;
