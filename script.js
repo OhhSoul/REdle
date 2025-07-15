@@ -229,3 +229,9 @@ guessInput.addEventListener("keypress", e => {
 });
 
 gameContainer.style.display = "none";
+
+document.getElementById("title").addEventListener("click", () => {
+  gameContainer.style.display = "none";
+  modeSelector.style.display = "block";
+  clearGame();
+});
