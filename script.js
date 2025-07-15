@@ -27,8 +27,13 @@ const guessButton = document.getElementById("guessButton");
 const playAgainButton = document.getElementById("playAgain");
 const resultsDiv = document.getElementById("results");
 const charactersList = document.getElementById("charactersList");
+const guessCounter = document.getElementById("guessCounter");
 
 let table = null;
+
+function updateGuessCounter() {
+  guessCounter.textContent = `${guessCount}/${maxGuesses}`;
+}
 
 function pickCharacter() {
   let newChar;
@@ -41,6 +46,7 @@ function pickCharacter() {
 
 function clearGame() {
   guessCount = 0;
+  updateGuessCounter();
   resultsDiv.innerHTML = "";
   guessInput.value = "";
   guessInput.disabled = false;
@@ -93,6 +99,7 @@ function displayResults(guess) {
   table.appendChild(guessRow);
 
   guessCount++;
+  updateGuessCounter();
 
   if (guess.name === currentCharacter.name) {
     showAnswerRow(true);
@@ -164,11 +171,6 @@ function guessCharacter() {
 
   guessInput.value = "";
   guessInput.focus();
-}
-
-function toggleLegend() {
-  const legendContent = document.getElementById("legend-content");
-  legendContent.style.display = legendContent.style.display === "none" || legendContent.style.display === "" ? "block" : "none";
 }
 
 guessButton.addEventListener("click", guessCharacter);
