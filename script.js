@@ -38,11 +38,16 @@ const characters = [
   { name: "Merchant", debut: "Resident Evil 4 (2005)", playable: false, faction: "Neutral", gender: "Male" }
 ];
 
+// ========== CHARACTER DATA ==========
+const characters = [
+  // character list remains unchanged...
+];
+
 // ========== DAILY CHARACTER SEEDING ==========
 function getEasternTimeDateKey() {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const easternOffset = -4 * 60; // EDT
+  const easternOffset = -4 * 60;
   const eastern = new Date(utc + 60000 * easternOffset);
   return eastern.toISOString().split("T")[0];
 }
@@ -69,12 +74,13 @@ const guessButton = document.getElementById("guessButton");
 const resultsDiv = document.getElementById("results");
 const playAgainButton = document.getElementById("playAgain");
 const charactersList = document.getElementById("charactersList");
-const guessCounter = document.getElementById("guessCounter");
+const guessCounter = document.getElementById("counter");
 const title = document.getElementById("title");
 const dailyButton = document.getElementById("dailyButton");
 const playButton = document.getElementById("playButton");
 const homeDiv = document.getElementById("home");
 const gameDiv = document.getElementById("game");
+const endScreen = document.getElementById("endScreen");
 
 function startGame(mode) {
   isDaily = mode === "daily";
@@ -88,6 +94,8 @@ function startGame(mode) {
   guessInput.disabled = false;
   guessButton.disabled = false;
   playAgainButton.style.display = "none";
+  endScreen.style.display = "none";
+  endScreen.innerHTML = "";
   updateCounter();
   guessInput.focus();
 }
@@ -159,12 +167,14 @@ function guessCharacter() {
   if (match.name === currentCharacter.name) {
     guessInput.disabled = true;
     guessButton.disabled = true;
-    resultsDiv.innerHTML += `<h2 class='result-message win'>You Win!</h2>`;
+    endScreen.innerHTML = `<h2 class='result-message win'>You Win!</h2>`;
+    endScreen.style.display = "block";
     playAgainButton.style.display = isDaily ? "none" : "block";
   } else if (guesses.length >= maxGuesses) {
     guessInput.disabled = true;
     guessButton.disabled = true;
-    resultsDiv.innerHTML += `<h2 class='result-message lose'>You Lose! The answer was ${currentCharacter.name}</h2>`;
+    endScreen.innerHTML = `<h2 class='result-message lose'>You Lose! The answer was ${currentCharacter.name}</h2>`;
+    endScreen.style.display = "block";
     playAgainButton.style.display = isDaily ? "none" : "block";
   }
 }
