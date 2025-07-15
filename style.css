@@ -80,7 +80,7 @@ th {
   background-color: red !important;
 }
 
-/* New for boxed guess results */
+/* Boxed results row */
 .result-row {
   display: flex;
   justify-content: center;
@@ -94,6 +94,14 @@ th {
   background-color: rgba(255, 255, 255, 0.1);
   border: 2px solid white;
   border-radius: 8px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Game message */
+#gameMessage {
+  margin-top: 15px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
 }
