@@ -1,4 +1,5 @@
 const characters = [
+const characters = [
   { name: "Chris Redfield", debut: "Resident Evil", playable: true, faction: "S.T.A.R.S.", gender: "Male" },
   { name: "Jill Valentine", debut: "Resident Evil", playable: true, faction: "S.T.A.R.S.", gender: "Female" },
   { name: "Barry Burton", debut: "Resident Evil", playable: false, faction: "S.T.A.R.S.", gender: "Male" },
@@ -10,12 +11,18 @@ const characters = [
   { name: "Ada Wong", debut: "Resident Evil 2", playable: true, faction: "Independent", gender: "Female" },
   { name: "Robert Kendo", debut: "Resident Evil 2", playable: false, faction: "Civilian", gender: "Male" },
   { name: "Ben Bertolucci", debut: "Resident Evil 2", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "HUNK", debut: "Resident Evil 2", playable: true, faction: "Umbrella", gender: "Male" },
+  { name: "Sherry Birkin", debut: "Resident Evil 2", playable: true, faction: "Civilian", gender: "Female" },
+  { name: "Brian Irons", debut: "Resident Evil 2", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "Mr. X", debut: "Resident Evil 2", playable: false, faction: "Umbrella", gender: "Male" },
   { name: "Annette Birkin", debut: "Resident Evil 2", playable: false, faction: "Umbrella", gender: "Female" },
   { name: "William Birkin", debut: "Resident Evil 2", playable: false, faction: "Umbrella", gender: "Male" },
   { name: "Marvin Branagh", debut: "Resident Evil 2", playable: false, faction: "Civilian", gender: "Male" },
   { name: "Carlos Oliveira", debut: "Resident Evil 3", playable: true, faction: "U.B.C.S.", gender: "Male" },
   { name: "Nicholai Ginovaef", debut: "Resident Evil 3", playable: false, faction: "U.B.C.S.", gender: "Male" },
-  { name: "Mikhail Victor", debut: "Resident Evil 3", playable: false, faction: "U.B.C.S.", gender: "Male" }
+  { name: "Mikhail Victor", debut: "Resident Evil 3", playable: false, faction: "U.B.C.S.", gender: "Male" },
+  { name: "Dario Rosso", debut: "Resident Evil 3", playable: false, faction: "Civilian", gender: "Male" },
+  { name: "Nemesis", debut: "Resident Evil 3", playable: false, faction: "Umbrella", gender: "Male" }
 ];
 
 let currentCharacter = null;
