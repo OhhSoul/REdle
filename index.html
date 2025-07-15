@@ -2,28 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>REdle</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <h1 id="title">REdle</h1>
 
   <div id="home">
-    <div id="home-buttons">
-      <button id="playButton">Play</button>
-      <button id="dailyButton">Daily</button>
-    </div>
+    <button onclick="startGame('play')">Play</button>
+    <button onclick="startGame('daily')">Daily</button>
   </div>
 
-  <div id="game" style="display:none;">
-    <div id="counter">0/8</div>
-    <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" list="charactersList" />
-    <datalist id="charactersList"></datalist>
-    <button id="guessButton">Guess</button>
-    <div id="results"></div>
-    <div id="endScreen"></div>
-    <button id="playAgain">Play Again</button>
+  <div id="game" style="display: none;">
+    <div id="guessCounter">0/8</div>
+    <input list="characters" id="guessInput" placeholder="Type a character..."/>
+    <datalist id="characters"></datalist>
+    <button onclick="makeGuess()">Guess</button>
+    <table id="resultsTable"></table>
   </div>
 
   <script src="script.js"></script>
