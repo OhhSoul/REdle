@@ -2,27 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>REdle</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1 id="title">REdle</h1>
+  <div id="title" onclick="location.reload()">REdle</div>
 
-  <div id="homeScreen">
-    <button id="playBtn">Play</button>
-    <button id="dailyBtn">Daily</button>
+  <div id="menu">
+    <button onclick="startGame()">Play</button>
+    <button onclick="startDaily()">Daily</button>
   </div>
 
-  <div id="gameScreen" style="display:none;">
+  <div id="inputArea" style="display: none;">
+    <input list="characters" type="text" id="characterInput" placeholder="Type a character..." autocomplete="off"/>
+    <datalist id="characters"></datalist>
+    <button onclick="submitGuess()">Guess</button>
     <div id="guessCounter">0 / 8</div>
-    <input id="guessInput" type="text" placeholder="Type a character..." autocomplete="off" list="charactersList" />
-    <datalist id="charactersList"></datalist>
-    <button id="guessButton">Guess</button>
+  </div>
 
-    <div id="results"></div>
-    <div id="endMessage" style="margin-top: 20px; font-size: 24px;"></div>
-    <button id="playAgainBtn" style="display:none;">Play Again</button>
+  <div id="message"></div>
+  <div id="playAgainContainer" style="margin-top: 20px;"></div>
+  
+  <div id="resultTable">
+    <table id="results" style="display: none;">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Game</th>
+          <th>Playable</th>
+          <th>Gender</th>
+        </tr>
+      </thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
   </div>
 
   <script src="script.js"></script>
